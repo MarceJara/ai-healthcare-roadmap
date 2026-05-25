@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA × Salud — Hoja de Ruta</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#1D9E75;--teal-light:#E1F5EE;--teal-mid:#5DCAA5;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --purple:#3C3489;--purple-light:#EEEDFE;
+  --amber:#854F0B;--amber-light:#FAEEDA;
+  --ink:#1a1a1a;--ink-soft:#555;--ink-muted:#999;
+  --surface:#f8f7f4;--white:#fff;--border:rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);min-height:100vh;}
+
+/* LANG TOGGLE */
+.lang-bar{background:var(--ink);display:flex;justify-content:flex-end;padding:10px 48px 0;gap:6px;}
+.lang-btn{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;padding:5px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.55);cursor:pointer;transition:all .15s;letter-spacing:.04em;}
+.lang-btn:hover{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85);}
+.lang-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+.lang-flag{font-size:15px;line-height:1;}
+
+/* HEADER */
+.header{background:var(--ink);color:#fff;padding:32px 48px 40px;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:var(--teal);opacity:.1;}
+.header-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:14px;}
+.header h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,46px);line-height:1.1;font-weight:400;}
+.header h1 em{font-style:italic;color:var(--teal-mid);}
+.header-sub{margin-top:12px;font-size:14px;color:rgba(255,255,255,.5);font-weight:300;max-width:520px;line-height:1.6;}
+.header-meta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;}
+.meta-pill{font-family:'DM Mono',monospace;font-size:10px;padding:4px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.55);}
+.meta-pill.accent{background:var(--teal);border-color:var(--teal);color:#fff;}
+
+/* TABS */
+.tab-bar{display:flex;padding:0 48px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.tab-btn{font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;padding:14px 20px;background:none;border:none;border-bottom:2px solid transparent;color:var(--ink-muted);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.tab-btn:hover{color:var(--ink);}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:500;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ROADMAP */
+.phases{padding:0 48px 48px;max-width:1100px;margin:0 auto;}
+.phase-block{margin-top:44px;}
+.phase-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.phase-num{font-family:'DM Serif Display',serif;font-size:44px;line-height:1;font-style:italic;color:rgba(0,0,0,.07);min-width:44px;}
+.phase-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:2px;}
+.phase-title{font-family:'DM Serif Display',serif;font-size:20px;font-weight:400;}
+.phase-time{margin-left:auto;font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);background:var(--teal-light);padding:4px 12px;border-radius:999px;white-space:nowrap;}
+.connector-line{width:2px;height:28px;background:var(--teal-mid);opacity:.25;margin:0 0 0 69px;}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden;}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07);}
+.card.featured{border-color:var(--teal-mid);}
+.card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);}
+.card-step{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-muted);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
+.featured-badge{font-size:9px;font-weight:500;background:var(--teal-light);color:var(--teal);padding:2px 8px;border-radius:999px;}
+.card-title{font-size:14px;font-weight:500;line-height:1.3;color:var(--ink);margin-bottom:3px;}
+.card-who{font-size:11px;color:var(--ink-muted);font-weight:300;margin-bottom:10px;}
+.pills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;}
+.pill{font-size:9px;padding:2px 7px;border-radius:4px;font-weight:500;}
+.pill-teal{background:var(--teal-light);color:#085041;}
+.pill-blue{background:var(--blue-light);color:var(--blue);}
+.pill-purple{background:var(--purple-light);color:var(--purple);}
+.hc-note{font-size:11px;color:var(--ink-soft);line-height:1.5;border-left:2px solid var(--teal-mid);padding-left:9px;margin-bottom:14px;font-weight:300;}
+.instructions{background:var(--surface);border-radius:8px;padding:12px 14px;margin-bottom:14px;}
+.instructions-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
+.instructions ol{padding-left:16px;display:flex;flex-direction:column;gap:4px;}
+.instructions li{font-size:11px;color:var(--ink-soft);line-height:1.45;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border);}
+.price{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--teal);}
+.link-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:5px 12px;border-radius:7px;text-decoration:none;transition:opacity .15s;}
+.link-btn:hover{opacity:.75;}
+.link-yt{background:#FCEBEB;color:#A32D2D;}
+.link-web{background:var(--surface);color:var(--ink-soft);border:1px solid var(--border);}
+.type-row{display:flex;align-items:center;gap:5px;margin-bottom:10px;}
+.type-dot{width:6px;height:6px;border-radius:50%;}
+.dot-red{background:#E24B4A;}.dot-teal{background:var(--teal);}.dot-purple{background:#534AB7;}
+.type-label{font-size:10px;color:var(--ink-muted);font-family:'DM Mono',monospace;}
+
+/* CONCEPTS */
+.concepts-wrap{padding:36px 48px 48px;max-width:860px;margin:0 auto;}
+.concepts-intro{font-size:13px;color:var(--ink-muted);margin-bottom:32px;line-height:1.6;}
+.concept-item{display:flex;gap:20px;position:relative;}
+.concept-item:not(:last-child) .concept-line{position:absolute;left:17px;top:36px;bottom:-24px;width:1.5px;background:var(--border);}
+.concept-num-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.concept-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;flex-shrink:0;z-index:1;}
+.cn-blue{background:var(--blue-light);color:var(--blue);}
+.cn-teal{background:var(--teal-light);color:var(--teal);}
+.cn-amber{background:var(--amber-light);color:var(--amber);}
+.concept-body{padding-bottom:28px;flex:1;}
+.concept-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:4px;}
+.concept-title{font-size:15px;font-weight:500;margin-bottom:5px;}
+.concept-desc{font-size:12px;color:var(--ink-soft);line-height:1.6;margin-bottom:8px;}
+.concept-hc{font-size:11px;color:var(--teal);background:var(--teal-light);border-radius:6px;padding:6px 10px;display:inline-block;line-height:1.45;}
+.concept-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+
+/* LEGEND + FOOTER */
+.legend{margin:0 48px;padding:16px 20px;background:var(--white);border:1px solid var(--border);border-radius:10px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+.legend-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-soft);}
+.legend-swatch{width:9px;height:9px;border-radius:2px;}
+.footer{margin:24px 48px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.footer-left{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-muted);}
+.footer-right{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);}
+
+/* LANG HIDE */
+[data-lang]{transition:opacity .2s;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.header{animation:fadeUp .4s ease both;}
+
+@media(max-width:600px){
+  .header,.phases,.concepts-wrap,.legend,.footer{padding-left:20px;padding-right:20px;}
+  .lang-bar{padding:10px 20px 0;}
+  .tab-bar{padding:0 20px;overflow-x:auto;}
+  .phase-header{flex-wrap:wrap;}.phase-time{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- LANG TOGGLE BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-es" onclick="setLang('es')">
+    <span class="lang-flag">🇵🇪</span> ESP
+  </button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">
+    <span class="lang-flag">🇺🇸</span> ENG
+  </button>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-label" data-es="IA × Salud — Kit de inicio" data-en="AI × Healthcare — Starter kit">IA × Salud — Kit de inicio</div>
+  <h1><span data-es="Tu <em>introducción</em> a la IA<br>en salud" data-en="Your <em>intro</em> to AI<br>in healthcare">Tu <em>introducción</em> a la IA<br>en salud</span></h1>
+  <p class="header-sub" data-es="7 recursos seleccionados · LLMs, RAG, IA causal, modelos generativos, gemelos digitales y más — todos gratuitos, todos conectados a la salud." data-en="7 curated resources · LLMs, RAG, causal AI, generative models, digital twins and more — all free, all healthcare-connected.">7 recursos seleccionados · LLMs, RAG, IA causal, modelos generativos, gemelos digitales y más — todos gratuitos, todos conectados a la salud.</p>
+  <div class="header-meta">
+    <span class="meta-pill accent" data-es="Costo total: $0" data-en="$0 total cost">Costo total: $0</span>
+    <span class="meta-pill" data-es="~12–15 hr en total" data-en="~12–15 hr total">~12–15 hr en total</span>
+    <span class="meta-pill" data-es="Sin programación" data-en="No coding required">Sin programación</span>
+    <span class="meta-pill" data-es="Formación biomédica asumida" data-en="Biomedical background assumed">Formación biomédica asumida</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('roadmap',this)" data-es="📍 Hoja de ruta" data-en="📍 Roadmap">📍 Hoja de ruta</button>
+  <button class="tab-btn" onclick="switchTab('concepts',this)" data-es="🧠 Conceptos clave" data-en="🧠 Key concepts">🧠 Conceptos clave</button>
+</div>
+
+<!-- ═══════ TAB 1: ROADMAP ═══════ -->
+<div id="tab-roadmap" class="tab-panel active">
+<div class="phases">
+
+  <!-- PHASE 1 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-num">01</div>
+      <div>
+        <div class="phase-tag" data-es="Fase uno · Ver primero" data-en="Phase one · Watch first">Fase uno · Ver primero</div>
+        <div class="phase-title" data-es="LLMs y RAG — modelo mental en 2 horas" data-en="LLMs &amp; RAG — mental model in 2 hours">LLMs y RAG — modelo mental en 2 horas</div>
+      </div>
+      <div class="phase-time" data-es="~2 hr · 3 videos" data-en="~2 hr · 3 videos">~2 hr · 3 videos</div>
+    </div>
+    <div class="cards">
+
+      <!-- Card 1 -->
+      <div class="card featured">
+        <div class="card-step">01 / 07 <span class="featured-badge" data-es="Empieza aquí" data-en="Start here">Empieza aquí</span></div>
+        <div class="type-row"><span class="type-dot dot-red"></span><span class="type-label">YouTube · 1 hr · <span data-es="Público general" data-en="General audience">Público general</span></span></div>
+        <div class="card-title">Karpathy — Intro to Large Language Models</div>
+        <div class="card-who">Andrej Karpathy, co-founder OpenAI</div>
+        <div class="pills">
+          <span class="pill pill-blue">LLMs</span>
+          <span class="pill pill-blue">RAG</span>
+          <span class="pill pill-teal" data-es="Alucinaciones" data-en="Hallucinations">Alucinaciones</span>
+          <span class="pill pill-teal" data-es="Seguridad en LLMs" data-en="LLM security">Seguridad en LLMs</span>
+        </div>
+        <div class="hc-note" data-es="Cómo funcionan los LLMs de principio a fin, y por qué el RAG es la solución a las alucinaciones en sistemas clínicos." data-en="How LLMs work end-to-end and why RAG matters for clinical systems where hallucinated medical facts cause real harm.">Cómo funcionan los LLMs de principio a fin, y por qué el RAG es la solución a las alucinaciones en sistemas clínicos.</div>
+        <div class="card-footer">
+          <span class="price">Free</span>
+          <a class="link-btn link-yt" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">▶ <span data-es="Ver" data-en="Watch">Ver</span></a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-step">02 / 07</div>
+        <div class="type-row"><span class="type-dot dot-red"></span><span class="type-label">YouTube · ~62 min · <span data-es="Matemáticas animadas" data-en="Animated math">Matemáticas animadas</span></span></div>
+        <div class="card-title">3Blue1Brown — Transformers playlist</div>
+        <div class="card-who">Grant Sanderson · 3 <span data-es="videos" data-en="videos">videos</span>: 9 + 27 + 26 min</div>
+        <div class="pills">
+          <span class="pill pill-blue">Transformers</span>
+          <span class="pill pill-blue">Attention</span>
+          <span class="pill pill-blue">Embeddings</span>
+        </div>
+        <div class="hc-note" data-es="Intuición visual sobre cómo el modelo procesa texto médico y secuencias. No se necesita formación matemática previa." data-en="Visual intuition for how the model processes medical text and sequences. No math background needed.">Intuición visual sobre cómo el modelo procesa texto médico y secuencias. No se necesita formación matemática previa.</div>
+        <div class="card-footer">
+          <span class="price">Free</span>
+          <a class="link-btn link-yt" href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank">▶ <span data-es="Ver" data-en="Watch">Ver</span></a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="card-step">03 / 07</div>
+        <div class="type-row"><span class="type-dot dot-red"></span><span class="type-label">YouTube · ~8 min · Lightboard</span></div>
+        <div class="card-title">IBM Technology — What is RAG?</div>
+        <div class="card-who">IBM — Marina Danilevsky</div>
+        <div class="pills">
+          <span class="pill pill-blue">RAG</span>
+          <span class="pill pill-teal" data-es="Respuestas fundamentadas" data-en="Grounded answers">Respuestas fundamentadas</span>
+          <span class="pill pill-teal" data-es="Búsqueda vectorial" data-en="Vector search">Búsqueda vectorial</span>
+        </div>
+        <div class="hc-note" data-es="Por qué el RAG importa en salud: datos privados de pacientes, guías clínicas actualizadas y fuentes trazables — todo en 8 minutos." data-en="Why RAG matters in healthcare: private patient data, up-to-date clinical guidelines, and traceable sources — covered in 8 minutes.">Por qué el RAG importa en salud: datos privados de pacientes, guías clínicas actualizadas y fuentes trazables — todo en 8 minutos.</div>
+        <div class="card-footer">
+          <span class="price">Free</span>
+          <a class="link-btn link-yt" href="https://www.youtube.com/watch?v=T-D1OfcDW1M" target="_blank">▶ <span data-es="Ver" data-en="Watch">Ver</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /phase 1 -->
+
+  <div class="connector-line"></div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-num">02</div>
+      <div>
+        <div class="phase-tag" data-es="Fase dos · Leer y explorar" data-en="Phase two · Read &amp; explore">Fase dos · Leer y explorar</div>
+        <div class="phase-title" data-es="Amplitud en todos los temas de IA — enfoque en salud" data-en="Breadth across all AI topics — healthcare-native">Amplitud en todos los temas de IA — enfoque en salud</div>
+      </div>
+      <div class="phase-time" data-es="~10–13 hr · 4 recursos" data-en="~10–13 hr · 4 resources">~10–13 hr · 4 recursos</div>
+    </div>
+    <div class="cards">
+
+      <!-- Card 4 -->
+      <div class="card featured">
+        <div class="card-step">04 / 07 <span class="featured-badge" data-es="Mayor cobertura" data-en="Broadest coverage">Mayor cobertura</span></div>
+        <div class="type-row"><span class="type-dot dot-teal"></span><span class="type-label"><span data-es="Curso gratuito · MIT OCW · A tu ritmo" data-en="Free course · MIT OCW · Self-paced">Curso gratuito · MIT OCW · A tu ritmo</span></span></div>
+        <div class="card-title">MIT 6.S897 — Machine Learning for Healthcare</div>
+        <div class="card-who">MIT · <span data-es="Diapositivas y videos completos" data-en="Full lecture slides + videos">Diapositivas y videos completos</span></div>
+        <div class="pills">
+          <span class="pill pill-teal" data-es="Inferencia causal" data-en="Causal inference">Inferencia causal</span>
+          <span class="pill pill-teal">Time-Series</span>
+          <span class="pill pill-teal">Responsible AI</span>
+          <span class="pill pill-teal">Clinical NLP</span>
+          <span class="pill pill-blue">LLMs</span>
+        </div>
+        <div class="hc-note" data-es="Cubre casi todos los temas de CCAIM, completamente anclados en datos clínicos. El mejor recurso único para amplitud y contexto médico." data-en="Covers nearly every AI topic from the CCAIM list, grounded entirely in clinical data. Best single resource for breadth + healthcare context.">Cubre casi todos los temas de CCAIM, completamente anclados en datos clínicos. El mejor recurso único para amplitud y contexto médico.</div>
+        <div class="instructions">
+          <div class="instructions-label" data-es="Cómo abordarlo" data-en="How to tackle it">Cómo abordarlo</div>
+          <ol>
+            <li data-es="Revisa el temario primero — elige 4 o 5 clases que se alineen con tus prioridades." data-en="Skim the syllabus first — pick 4–5 lectures that match your priorities.">Revisa el temario primero — elige 4 o 5 clases que se alineen con tus prioridades.</li>
+            <li data-es="Mira el video y luego revisa el PDF de diapositivas para reforzar." data-en="Watch lecture video, then skim the slide PDF to reinforce.">Mira el video y luego revisa el PDF de diapositivas para reforzar.</li>
+            <li data-es="Prioriza: Clases 1–3 (bases), 6 (NLP clínico), 10 (causalidad), 14 (equidad)." data-en="Focus on: Lectures 1–3 (foundations), 6 (NLP), 10 (causal), 14 (fairness).">Prioriza: Clases 1–3 (bases), 6 (NLP clínico), 10 (causalidad), 14 (equidad).</li>
+            <li data-es="Omite los ejercicios — estás aquí por los conceptos, no por las tareas." data-en="Skip the problem sets — you're here for the concepts, not the homework.">Omite los ejercicios — estás aquí por los conceptos, no por las tareas.</li>
+          </ol>
+        </div>
+        <div class="card-footer">
+          <span class="price">Free</span>
+          <a class="link-btn link-web" href="https://ocw.mit.edu/courses/6-s897-machine-learning-for-healthcare-spring-2019/" target="_blank">↗ <span data-es="Abrir curso" data-en="Open course">Abrir curso</span></a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <div class="card-step">05 / 07</div>
+        <div class="type-row"><span class="type-dot dot-teal"></span><span class="type-label"><span data-es="MOOC gratuito · Elige 2–3 · 1–2 hr c/u" data-en="Free MOOC · Pick 2–3 · 1–2 hr each">MOOC gratuito · Elige 2–3 · 1–2 hr c/u</span></span></div>
+        <div class="card-title">DeepLearning.AI — Short Courses</div>
+        <div class="card-who">Andrew Ng · <span data-es="Úsalo como menú por tema" data-en="Use as a menu by topic">Úsalo como menú por tema</span></div>
+        <div class="pills">
+          <span class="pill pill-blue">RAG</span>
+          <span class="pill pill-blue">LLMs</span>
+          <span class="pill pill-purple" data-es="Modelos generativos" data-en="Generative models">Modelos generativos</span>
+          <span class="pill pill-teal">AutoML</span>
+        </div>
+        <div class="hc-note" data-es="Cada curso cubre un tema de IA con aplicación directa a la salud. Úsalos según lo que necesites en el momento." data-en="Each course targets one AI topic with a healthcare-applicable lens. Use them on demand.">Cada curso cubre un tema de IA con aplicación directa a la salud. Úsalos según lo que necesites en el momento.</div>
+        <div class="instructions">
+          <div class="instructions-label" data-es="Cómo abordarlo" data-en="How to tackle it">Cómo abordarlo</div>
+          <ol>
+            <li data-es="Entra al catálogo y busca tu tema (ej. "RAG")." data-en="Go to the catalog and search your topic (e.g. "RAG").">Entra al catálogo y busca tu tema (ej. "RAG").</li>
+            <li data-es="Cursos recomendados: Retrieval Augmented Generation, Prompt Engineering for Developers, AI for Medical Imaging." data-en="Recommended: Retrieval Augmented Generation, Prompt Engineering for Developers, AI for Medical Imaging.">Cursos recomendados: <em>Retrieval Augmented Generation</em>, <em>Prompt Engineering for Developers</em>, <em>AI for Medical Imaging</em>.</li>
+            <li data-es="Cada curso dura 1–2 hr — trátalo como módulo independiente, no como secuencia." data-en="Each course is 1–2 hr — treat each as a standalone module.">Cada curso dura 1–2 hr — trátalo como módulo independiente, no como secuencia.</li>
+          </ol>
+        </div>
+        <div class="card-footer">
+          <span class="price">Free</span>
+          <a class="link-btn link-web" href="https://www.deeplearning.ai/short-courses/" target="_blank">↗ <span data-es="Ver cursos" data-en="Browse courses">Ver cursos</span></a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <div class="card-step">06 / 07</div>
+        <div class="type-row"><span class="type-dot dot-purple"></span><span class="type-label"><span data-es="Archivo de tutoriales · Videos ICML / NeurIPS" data-en="Tutorial archive · ICML / NeurIPS videos">Archivo de tutoriales · Videos ICML / NeurIPS</span></span></div>
+        <div class="card-title">van der Schaar Lab — Tutorial Archive</div>
+        <div class="card-who">Cambridge ML · <span data-es="El mismo lab detrás de CCAIM" data-en="Same lab behind CCAIM school">El mismo lab detrás de CCAIM</span></div>
+        <div class="pills">
+          <span class="pill pill-purple" data-es="Datos sintéticos" data-en="Synthetic data">Datos sintéticos</span>
+          <span class="pill pill-purple" data-es="Gemelos digitales" data-en="Digital twins">Gemelos digitales</span>
+          <span class="pill pill-teal">Time-Series</span>
+          <span class="pill pill-teal">AutoML</span>
+        </div>
+        <div class="hc-note" data-es="Gemelos digitales de pacientes, historias clínicas sintéticas y tratamientos individualizados — todo con enfoque en salud." data-en="Patient digital twins, synthetic EHRs, and individualized treatment — all healthcare-native.">Gemelos digitales de pacientes, historias clínicas sintéticas y tratamientos individualizados — todo con enfoque en salud.</div>
+        <div class="instructions">
+          <div class="instructions-label" data-es="Cómo abordarlo" data-en="How to tackle it">Cómo abordarlo</div>
+          <ol>
+            <li data-es='Ve a la sección "Tutorials" y filtra por tema (gemelos digitales, datos sintéticos).' data-en='Navigate to "Tutorials" section — filter by topic (digital twins, synthetic data).'>Ve a la sección "Tutorials" y filtra por tema (gemelos digitales, datos sintéticos).</li>
+            <li data-es="Mira el video del tutorial de ICML o NeurIPS para tu tema elegido (~45–90 min)." data-en="Watch the ICML or NeurIPS tutorial video for your chosen topic (~45–90 min).">Mira el video del tutorial de ICML o NeurIPS para tu tema elegido (~45–90 min).</li>
+            <li data-es="Lee el artículo del blog si está disponible — son concisos y bien escritos." data-en="Read the companion blog post if available — they're concise and well-written.">Lee el artículo del blog si está disponible — son concisos y bien escritos.</li>
+          </ol>
+        </div>
+        <div class="card-footer">
+          <span class="price">Free</span>
+          <a class="link-btn link-web" href="https://www.vanderschaar-lab.com/" target="_blank">↗ <span data-es="Abrir lab" data-en="Open lab">Abrir lab</span></a>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card">
+        <div class="card-step">07 / 07</div>
+        <div class="type-row"><span class="type-dot dot-teal"></span><span class="type-label">MOOC · Coursera · ~6 hr · <span data-es="Sin matemáticas" data-en="No math">Sin matemáticas</span></span></div>
+        <div class="card-title">AI for Everyone — Andrew Ng</div>
+        <div class="card-who">DeepLearning.AI · <span data-es="Sin código, sin matemáticas" data-en="No code, no math required">Sin código, sin matemáticas</span></div>
+        <div class="pills">
+          <span class="pill pill-teal">Responsible AI</span>
+          <span class="pill pill-blue">LLMs</span>
+          <span class="pill pill-teal" data-es="Estrategia de IA" data-en="AI strategy">Estrategia de IA</span>
+        </div>
+        <div class="hc-note" data-es="Enmarca las capacidades y limitaciones de la IA desde una perspectiva de liderazgo — útil para entender por qué los proyectos de IA en salud triunfan o fracasan." data-en="Frames AI capabilities and limits from a leadership lens — useful for understanding why healthcare AI projects succeed or fail.">Enmarca las capacidades y limitaciones de la IA desde una perspectiva de liderazgo — útil para entender por qué los proyectos de IA en salud triunfan o fracasan.</div>
+        <div class="instructions">
+          <div class="instructions-label" data-es="Cómo abordarlo" data-en="How to tackle it">Cómo abordarlo</div>
+          <ol>
+            <li data-es="Audita de forma gratuita — no necesitas pagar por el certificado." data-en="Audit for free — no need to pay for the certificate.">Audita de forma gratuita — no necesitas pagar por el certificado.</li>
+            <li data-es="Mira a 1.5× de velocidad; es el más accesible del conjunto." data-en="Watch at 1.5× speed; this is the most accessible resource of the set.">Mira a 1.5× de velocidad; es el más accesible del conjunto.</li>
+            <li data-es="Enfócate en las semanas 2 y 3: estrategia de proyectos de IA y IA en la empresa." data-en="Focus on weeks 2 &amp; 3: AI project strategy and company-wide AI.">Enfócate en las semanas 2 y 3: estrategia de proyectos de IA y IA en la empresa.</li>
+            <li data-es='Toma notas sobre "qué puede y no puede hacer la IA" — muy útil al hablar con médicos.' data-en='Optional: take notes on "what AI can and cannot do" — useful for conversations with clinicians.'>Toma notas sobre "qué puede y no puede hacer la IA" — muy útil al hablar con médicos.</li>
+          </ol>
+        </div>
+        <div class="card-footer">
+          <span class="price">Free (audit)</span>
+          <a class="link-btn link-web" href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">↗ Coursera</a>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /phase 2 -->
+
+</div><!-- /phases -->
+
+<!-- LEGEND -->
+<div class="legend" style="margin-bottom:0;">
+  <span class="legend-title" data-es="Clave de temas" data-en="Topic key">Clave de temas</span>
+  <div class="legend-item"><div class="legend-swatch" style="background:#E1F5EE;border:1px solid #9FE1CB;"></div><span data-es="Temas núcleo CCAIM" data-en="CCAIM core topics">Temas núcleo CCAIM</span></div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#E6F1FB;border:1px solid #B5D4F4;"></div>LLM / RAG</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#EEEDFE;border:1px solid #AFA9EC;"></div><span data-es="Generativo / Sintético" data-en="Generative / Synthetic">Generativo / Sintético</span></div>
+  <div class="legend-item" style="margin-left:auto;"><span style="font-family:'DM Mono',monospace;font-size:10px;color:#aaa;" data-es="7 recursos · $0 · ~12–15 hr" data-en="7 resources · $0 · ~12–15 hr">7 recursos · $0 · ~12–15 hr</span></div>
+</div>
+<div class="footer">
+  <div class="footer-left" data-es="Compilado para la preparación de CCAIM ML for Healthcare 2026" data-en="Compiled for CCAIM ML for Healthcare 2026 preparation">Compilado para la preparación de CCAIM ML for Healthcare 2026</div>
+  <div class="footer-right" data-es="Recursos verificados gratuitos · Mayo 2026" data-en="All resources verified free · May 2026">Recursos verificados gratuitos · Mayo 2026</div>
+</div>
+</div><!-- /tab-roadmap -->
+
+
+<!-- ═══════ TAB 2: CONCEPTS ═══════ -->
+<div id="tab-concepts" class="tab-panel">
+<div class="concepts-wrap">
+  <p class="concepts-intro" data-es="Explicaciones de alto nivel de los conceptos de IA que encontrarás — en el orden en que debes construir tu comprensión. Cada concepto depende del anterior." data-en="High-level explanations of the core AI concepts you'll encounter — in the order you should build understanding. Each concept depends on the one before it.">Explicaciones de alto nivel de los conceptos de IA que encontrarás — en el orden en que debes construir tu comprensión. Cada concepto depende del anterior.</p>
+
+  <div style="position:relative;">
+
+    <!-- 01 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-blue">01</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Base · Todo parte de aquí" data-en="Foundation · Everything starts here">Base · Todo parte de aquí</div>
+        <div class="concept-title" data-es="Redes neuronales y aprendizaje profundo" data-en="Neural Networks &amp; Deep Learning">Redes neuronales y aprendizaje profundo</div>
+        <div class="concept-desc" data-es="Sistemas computacionales inspirados en el cerebro. Capas de operaciones matemáticas simples, entrenadas en grandes conjuntos de datos para reconocer patrones — en imágenes, texto, audio o señales clínicas." data-en="Computational systems loosely inspired by the brain. Layers of simple mathematical operations, trained on large datasets to recognize patterns — in images, text, audio, or clinical signals.">Sistemas computacionales inspirados en el cerebro. Capas de operaciones matemáticas simples, entrenadas en grandes conjuntos de datos para reconocer patrones — en imágenes, texto, audio o señales clínicas.</div>
+        <div class="concept-hc" data-es="En salud: predice riesgo de enfermedad a partir de imágenes, ECG, tendencias de laboratorio y secuencias de historias clínicas." data-en="In healthcare: predicts disease risk from imaging, ECGs, lab trends, and EHR sequences.">En salud: predice riesgo de enfermedad a partir de imágenes, ECG, tendencias de laboratorio y secuencias de historias clínicas.</div>
+        <div class="concept-pills"><span class="pill pill-blue" data-es="Base de todo" data-en="Foundation for everything">Base de todo</span></div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-blue">02</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 01" data-en="Depends on 01">Depende de 01</div>
+        <div class="concept-title">Transformers y Attention</div>
+        <div class="concept-desc" data-es="La arquitectura detrás de casi todos los modelos de IA modernos. En lugar de leer texto palabra por palabra, analiza todas las palabras a la vez y aprende cuáles importan más para cada predicción — eso es el mecanismo de 'attention'." data-en="The architecture behind almost every modern AI model. Instead of reading text word by word, it looks at all words simultaneously and learns which ones matter most for each prediction — the 'attention' mechanism.">La arquitectura detrás de casi todos los modelos de IA modernos. En lugar de leer texto palabra por palabra, analiza todas las palabras a la vez y aprende cuáles importan más para cada predicción — eso es el mecanismo de 'attention'.</div>
+        <div class="concept-hc" data-es="En salud: lee la historia clínica completa a la vez, vinculando un síntoma del día 1 con un resultado de laboratorio del día 30." data-en="In healthcare: reads entire patient records at once, linking a symptom on day 1 to a lab result on day 30.">En salud: lee la historia clínica completa a la vez, vinculando un síntoma del día 1 con un resultado de laboratorio del día 30.</div>
+        <div class="concept-pills"><span class="pill pill-blue" data-es="Impulsa los LLMs" data-en="Powers LLMs">Impulsa los LLMs</span></div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-blue">03</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 02" data-en="Depends on 02">Depende de 02</div>
+        <div class="concept-title">Large Language Models (LLMs)</div>
+        <div class="concept-desc" data-es="Modelos Transformer entrenados en enormes corpus de texto para predecir la siguiente palabra. A través de este objetivo simple aprenden gramática, hechos, razonamiento y código. GPT-4, Claude y Gemini son LLMs." data-en="Transformer models trained on massive text corpora to predict the next word. Through this simple objective they learn grammar, facts, reasoning, and code. GPT-4, Claude, Gemini are all LLMs.">Modelos Transformer entrenados en enormes corpus de texto para predecir la siguiente palabra. A través de este objetivo simple aprenden gramática, hechos, razonamiento y código. GPT-4, Claude y Gemini son LLMs.</div>
+        <div class="concept-hc" data-es="En salud: resumen de notas clínicas, sugerencia de diagnósticos, consulta de interacciones farmacológicas, chatbots de atención al paciente." data-en="In healthcare: clinical note summarization, diagnosis suggestion, drug interaction lookup, patient Q&A chatbots.">En salud: resumen de notas clínicas, sugerencia de diagnósticos, consulta de interacciones farmacológicas, chatbots de atención al paciente.</div>
+        <div class="concept-pills"><span class="pill pill-blue">LLMs</span><span class="pill pill-blue">Prompt engineering</span></div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-blue">04</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 03" data-en="Depends on 03">Depende de 03</div>
+        <div class="concept-title">RAG — Retrieval-Augmented Generation</div>
+        <div class="concept-desc" data-es="Técnica que conecta un LLM a una base de conocimiento externa. Antes de responder, recupera los documentos más relevantes y los pasa como contexto al modelo. Elimina las alucinaciones y mantiene las respuestas ancladas en fuentes reales y trazables." data-en="A technique that connects an LLM to an external knowledge base. Before answering, it retrieves the most relevant documents, then passes them as context to the model. Fixes hallucinations and keeps answers grounded in real, traceable sources.">Técnica que conecta un LLM a una base de conocimiento externa. Antes de responder, recupera los documentos más relevantes y los pasa como contexto al modelo. Elimina las alucinaciones y mantiene las respuestas ancladas en fuentes reales y trazables.</div>
+        <div class="concept-hc" data-es="En salud: el LLM responde basándose en las guías clínicas propias del hospital, no en datos de entrenamiento genéricos. Cada respuesta es trazable a un documento fuente." data-en="In healthcare: LLM answers based on your hospital's own clinical guidelines, not generic training data. Every answer is traceable to a source document.">En salud: el LLM responde basándose en las guías clínicas propias del hospital, no en datos de entrenamiento genéricos. Cada respuesta es trazable a un documento fuente.</div>
+        <div class="concept-pills"><span class="pill pill-blue">RAG</span><span class="pill pill-blue" data-es="Bases de datos vectoriales" data-en="Vector databases">Bases de datos vectoriales</span><span class="pill pill-blue" data-es="Búsqueda semántica" data-en="Semantic search">Búsqueda semántica</span></div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-teal">05</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 01 · Rama paralela" data-en="Depends on 01 · Parallel track">Depende de 01 · Rama paralela</div>
+        <div class="concept-title" data-es="Modelos generativos" data-en="Generative Models">Modelos generativos</div>
+        <div class="concept-desc" data-es="Modelos que aprenden a crear datos nuevos — imágenes, texto, audio, tablas — estadísticamente similares a los datos de entrenamiento. Arquitecturas clave: GANs (dos redes en competencia), VAEs (codificar-decodificar con aleatoriedad), modelos de difusión (eliminación iterativa de ruido)." data-en="Models that learn to create new data — images, text, audio, tabular data — that looks statistically similar to training data. Key architectures: GANs, VAEs, Diffusion models.">Modelos que aprenden a crear datos nuevos — imágenes, texto, audio, tablas — estadísticamente similares a los datos de entrenamiento. Arquitecturas clave: GANs (dos redes en competencia), VAEs (codificar-decodificar con aleatoriedad), modelos de difusión (eliminación iterativa de ruido).</div>
+        <div class="concept-hc" data-es="En salud: generación de historias clínicas sintéticas para entrenamiento cuando los datos reales son escasos o están protegidos." data-en="In healthcare: generating synthetic patient records for training when real data is scarce or protected.">En salud: generación de historias clínicas sintéticas para entrenamiento cuando los datos reales son escasos o están protegidos.</div>
+        <div class="concept-pills"><span class="pill pill-purple" data-es="Modelos generativos" data-en="Generative models">Modelos generativos</span><span class="pill pill-purple" data-es="Datos sintéticos" data-en="Synthetic data">Datos sintéticos</span></div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-teal">06</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 05" data-en="Depends on 05">Depende de 05</div>
+        <div class="concept-title" data-es="Datos sintéticos" data-en="Synthetic Data">Datos sintéticos</div>
+        <div class="concept-desc" data-es="Datos generados artificialmente que conservan las propiedades estadísticas de los datos reales sin exponer información de ningún individuo. Se crean usando modelos generativos." data-en="Artificially generated data that preserves the statistical properties of real data without exposing any real individual's information. Created using generative models.">Datos generados artificialmente que conservan las propiedades estadísticas de los datos reales sin exponer información de ningún individuo. Se crean usando modelos generativos.</div>
+        <div class="concept-hc" data-es="En salud: compartir conjuntos de datos entre hospitales sin problemas de privacidad; entrenar modelos para enfermedades raras; ejecutar simulaciones regulatorias." data-en="In healthcare: share datasets across hospitals without HIPAA/GDPR issues; train models on rare conditions; run regulatory simulations.">En salud: compartir conjuntos de datos entre hospitales sin problemas de privacidad; entrenar modelos para enfermedades raras; ejecutar simulaciones regulatorias.</div>
+        <div class="concept-pills"><span class="pill pill-purple" data-es="Datos sintéticos" data-en="Synthetic data">Datos sintéticos</span><span class="pill pill-purple" data-es="IA con privacidad" data-en="Privacy-preserving AI">IA con privacidad</span></div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-teal">07</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 05 + 06" data-en="Depends on 05 + 06">Depende de 05 + 06</div>
+        <div class="concept-title" data-es="Gemelos digitales" data-en="Digital Twins">Gemelos digitales</div>
+        <div class="concept-desc" data-es="Una réplica virtual de un sistema real — o de un paciente — que se actualiza continuamente con datos reales y puede usarse para simular intervenciones antes de aplicarlas en la realidad. Combina modelos generativos, razonamiento causal y modelado de series temporales." data-en="A virtual replica of a real system — or a patient — continuously updated with real data and used to simulate interventions before applying them in reality. Combines generative models, causal reasoning, and time-series modeling.">Una réplica virtual de un sistema real — o de un paciente — que se actualiza continuamente con datos reales y puede usarse para simular intervenciones antes de aplicarlas en la realidad. Combina modelos generativos, razonamiento causal y modelado de series temporales.</div>
+        <div class="concept-hc" data-es='En salud: simula "¿qué pasa si le damos al paciente el fármaco A vs el B?" antes de prescribir. Permite ejecutar ensayos clínicos virtuales.' data-en='In healthcare: simulate "what happens if we give this patient drug A vs drug B" before prescribing. Run virtual clinical trials.'>En salud: simula "¿qué pasa si le damos al paciente el fármaco A vs el B?" antes de prescribir. Permite ejecutar ensayos clínicos virtuales.</div>
+        <div class="concept-pills"><span class="pill pill-teal" data-es="Gemelos digitales" data-en="Digital twins">Gemelos digitales</span><span class="pill pill-teal" data-es="Simulación de pacientes" data-en="Patient simulation">Simulación de pacientes</span></div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-amber">08</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Rama paralela" data-en="Parallel track">Rama paralela</div>
+        <div class="concept-title" data-es="Inferencia causal" data-en="Causal Inference">Inferencia causal</div>
+        <div class="concept-desc" data-es='La ciencia de responder "¿X causa Y?" — no solo "¿X e Y están correlacionadas?". Usa herramientas como DAGs (grafos acíclicos dirigidos) y contrafactuales para razonar sobre causa y efecto a partir de datos observacionales.' data-en='The science of answering "does X cause Y?" — not just "are X and Y correlated?". Uses tools like DAGs and counterfactuals to reason about cause and effect from observational data.'>La ciencia de responder "¿X causa Y?" — no solo "¿X e Y están correlacionadas?". Usa herramientas como DAGs (grafos acíclicos dirigidos) y contrafactuales para razonar sobre causa y efecto a partir de datos observacionales.</div>
+        <div class="concept-hc" data-es="En salud: ¿este tratamiento realmente funciona, o simplemente los pacientes más sanos tienden a recibirlo? Elimina la confusión en estudios observacionales con historias clínicas." data-en="In healthcare: does this treatment actually work, or do healthier patients just happen to receive it? Removes confounding from observational EHR studies.">En salud: ¿este tratamiento realmente funciona, o simplemente los pacientes más sanos tienden a recibirlo? Elimina la confusión en estudios observacionales con historias clínicas.</div>
+        <div class="concept-pills"><span class="pill pill-teal" data-es="Inferencia causal" data-en="Causal inference">Inferencia causal</span><span class="pill pill-teal">DAGs</span><span class="pill pill-teal" data-es="Contrafactuales" data-en="Counterfactuals">Contrafactuales</span></div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-amber">09</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 08" data-en="Depends on 08">Depende de 08</div>
+        <div class="concept-title">Causal Deep Learning</div>
+        <div class="concept-desc" data-es="Combina redes neuronales profundas con razonamiento causal. En lugar de solo predecir resultados, estos modelos aprenden la estructura causal subyacente — haciéndolos más robustos, interpretables y útiles para decisiones de tratamiento personalizadas." data-en="Combining deep neural networks with causal reasoning. Instead of just predicting outcomes, these models learn the underlying causal structure — making them more robust, interpretable, and useful for personalized treatment decisions.">Combina redes neuronales profundas con razonamiento causal. En lugar de solo predecir resultados, estos modelos aprenden la estructura causal subyacente — haciéndolos más robustos, interpretables y útiles para decisiones de tratamiento personalizadas.</div>
+        <div class="concept-hc" data-es='En salud: predice efectos de tratamiento individualizados — no "¿funciona este fármaco en promedio?" sino "¿funcionará en este paciente específico?"' data-en='In healthcare: predict individualized treatment effects — not "does this drug work on average?" but "will it work for this specific patient?"'>En salud: predice efectos de tratamiento individualizados — no "¿funciona este fármaco en promedio?" sino "¿funcionará en este paciente específico?"</div>
+        <div class="concept-pills"><span class="pill pill-teal">Causal Deep Learning</span><span class="pill pill-teal">ITE</span></div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-teal">10</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Rama paralela" data-en="Parallel track">Rama paralela</div>
+        <div class="concept-title" data-es="Modelado de series temporales" data-en="Time-Series Modeling">Modelado de series temporales</div>
+        <div class="concept-desc" data-es="Métodos para datos recopilados a lo largo del tiempo — donde la secuencia y el momento de las observaciones importan. Incluye enfoques clásicos (ARIMA) y aprendizaje profundo (LSTMs, Temporal Fusion Transformers)." data-en="Methods for data collected over time — where the sequence and timing of observations matters. Includes classical approaches (ARIMA) and deep learning (LSTMs, Temporal Fusion Transformers).">Métodos para datos recopilados a lo largo del tiempo — donde la secuencia y el momento de las observaciones importan. Incluye enfoques clásicos (ARIMA) y aprendizaje profundo (LSTMs, Temporal Fusion Transformers).</div>
+        <div class="concept-hc" data-es="En salud: signos vitales, ECG, monitoreo de glucosa, flujos de UCI — el tipo de dato dominante en entornos clínicos está indexado en el tiempo." data-en="In healthcare: vital signs, ECG, glucose monitoring, ICU streams — the dominant data type in clinical settings is time-indexed.">En salud: signos vitales, ECG, monitoreo de glucosa, flujos de UCI — el tipo de dato dominante en entornos clínicos está indexado en el tiempo.</div>
+        <div class="concept-pills"><span class="pill pill-teal">Time-Series</span><span class="pill pill-teal">EHR</span></div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-teal">11</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 01" data-en="Depends on 01">Depende de 01</div>
+        <div class="concept-title" data-es="Estimación de incertidumbre" data-en="Uncertainty Estimation">Estimación de incertidumbre</div>
+        <div class="concept-desc" data-es='Cuantificar qué tan seguro está un modelo de sus predicciones. En lugar de solo mostrar "cáncer: 82%", los modelos conscientes de la incertidumbre también dicen "no estoy seguro — este caso está fuera de mi distribución de entrenamiento".' data-en='Quantifying how confident a model is in its predictions. Instead of just outputting "cancer: 82%", uncertainty-aware models also say "I\'m not sure — this case is outside my training distribution."'>Cuantificar qué tan seguro está un modelo de sus predicciones. En lugar de solo mostrar "cáncer: 82%", los modelos conscientes de la incertidumbre también dicen "no estoy seguro — este caso está fuera de mi distribución de entrenamiento".</div>
+        <div class="concept-hc" data-es="En salud: crítico para la seguridad. Una predicción incorrecta con alta confianza puede llevar a un diagnóstico erróneo. Saber cuándo el modelo no sabe es esencial." data-en="In healthcare: safety-critical. A confident wrong prediction can lead to misdiagnosis. Knowing when the model doesn't know is essential.">En salud: crítico para la seguridad. Una predicción incorrecta con alta confianza puede llevar a un diagnóstico erróneo. Saber cuándo el modelo no sabe es esencial.</div>
+        <div class="concept-pills"><span class="pill pill-teal" data-es="Estimación de incertidumbre" data-en="Uncertainty estimation">Estimación de incertidumbre</span><span class="pill pill-teal">Calibration</span></div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-teal">12</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Depende de 01" data-en="Depends on 01">Depende de 01</div>
+        <div class="concept-title">Representation Learning</div>
+        <div class="concept-desc" data-es='Aprender representaciones internas compactas y significativas de los datos — para que el modelo entienda la "similitud" sin que se le indique explícitamente. Los embeddings son el resultado clave: palabras, pacientes o genes mapeados a vectores en un espacio de alta dimensión.' data-en='Learning compact, meaningful internal representations of data — so the model understands "similarity" without being explicitly told. Embeddings are a core output: words, patients, or genes mapped to vectors in high-dimensional space.'>Aprender representaciones internas compactas y significativas de los datos — para que el modelo entienda la "similitud" sin que se le indique explícitamente. Los embeddings son el resultado clave: palabras, pacientes o genes mapeados a vectores en un espacio de alta dimensión.</div>
+        <div class="concept-hc" data-es="En salud: embeddings de pacientes que agrupan casos similares — permitiendo recuperar historiales históricos similares para orientar el diagnóstico." data-en="In healthcare: patient embeddings that cluster similar patients together — enabling retrieval of similar historical cases to inform diagnosis.">En salud: embeddings de pacientes que agrupan casos similares — permitiendo recuperar historiales históricos similares para orientar el diagnóstico.</div>
+        <div class="concept-pills"><span class="pill pill-teal">Representation Learning</span><span class="pill pill-blue">Embeddings</span></div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-teal">13</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Rama paralela" data-en="Parallel track">Rama paralela</div>
+        <div class="concept-title">Data-Centric AI</div>
+        <div class="concept-desc" data-es="Un cambio de filosofía: en lugar de mejorar la arquitectura del modelo, enfócate en mejorar los datos — calidad del etiquetado, balance de clases, consistencia de la distribución y análisis de errores. Acuñado y promovido por Andrew Ng." data-en="A philosophy shift: instead of improving the model architecture, focus on improving the data — labeling quality, class balance, distribution consistency, and error analysis. Coined and championed by Andrew Ng.">Un cambio de filosofía: en lugar de mejorar la arquitectura del modelo, enfócate en mejorar los datos — calidad del etiquetado, balance de clases, consistencia de la distribución y análisis de errores. Acuñado y promovido por Andrew Ng.</div>
+        <div class="concept-hc" data-es="En salud: las etiquetas clínicas son ruidosas (distintos radiólogos no siempre coinciden). Limpiar y curar los datos de entrenamiento suele superar a construir un modelo más sofisticado." data-en="In healthcare: clinical labels are noisy (different radiologists disagree). Cleaning and curating training data often beats building a fancier model.">En salud: las etiquetas clínicas son ruidosas (distintos radiólogos no siempre coinciden). Limpiar y curar los datos de entrenamiento suele superar a construir un modelo más sofisticado.</div>
+        <div class="concept-pills"><span class="pill pill-teal">Data-Centric AI</span><span class="pill pill-teal" data-es="Calidad de etiquetas" data-en="Label quality">Calidad de etiquetas</span></div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-amber">14</div><div class="concept-line"></div></div>
+      <div class="concept-body">
+        <div class="concept-tag" data-es="Rama paralela" data-en="Parallel track">Rama paralela</div>
+        <div class="concept-title">Responsible AI</div>
+        <div class="concept-desc" data-es="El conjunto de principios, prácticas y herramientas para construir IA que sea justa, transparente, explicable y segura. Incluye auditoría de sesgos, interpretabilidad del modelo (SHAP, LIME), cumplimiento normativo (FDA, EU AI Act) y supervisión humana." data-en="The set of principles, practices, and tools for building AI that is fair, transparent, explainable, and safe. Covers bias auditing, model interpretability (SHAP, LIME), regulatory compliance (FDA, EU AI Act), and human oversight.">El conjunto de principios, prácticas y herramientas para construir IA que sea justa, transparente, explicable y segura. Incluye auditoría de sesgos, interpretabilidad del modelo (SHAP, LIME), cumplimiento normativo (FDA, EU AI Act) y supervisión humana.</div>
+        <div class="concept-hc" data-es="En salud: la IA debe ser explicable para médicos y reguladores. Los modelos sesgados entrenados con poblaciones no representativas pueden agravar las desigualdades en salud." data-en="In healthcare: AI must be explainable to clinicians and regulators. Biased models trained on skewed populations can worsen health disparities.">En salud: la IA debe ser explicable para médicos y reguladores. Los modelos sesgados entrenados con poblaciones no representativas pueden agravar las desigualdades en salud.</div>
+        <div class="concept-pills"><span class="pill pill-teal">Responsible AI</span><span class="pill pill-teal">Fairness</span><span class="pill pill-teal">Explainability</span></div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="concept-item">
+      <div class="concept-num-wrap"><div class="concept-num cn-amber">15</div></div>
+      <div class="concept-body" style="padding-bottom:0;">
+        <div class="concept-tag" data-es="Rama paralela" data-en="Parallel track">Rama paralela</div>
+        <div class="concept-title">AutoML</div>
+        <div class="concept-desc" data-es="Automatizar el proceso de selección, entrenamiento y ajuste de modelos de machine learning — para que un usuario con conocimiento del dominio pero poca experiencia en ML pueda construir modelos de alto rendimiento sin búsqueda manual de hiperparámetros." data-en="Automating the process of selecting, training, and tuning machine learning models — so a user with domain knowledge but limited ML expertise can build performant models without manual hyperparameter search.">Automatizar el proceso de selección, entrenamiento y ajuste de modelos de machine learning — para que un usuario con conocimiento del dominio pero poca experiencia en ML pueda construir modelos de alto rendimiento sin búsqueda manual de hiperparámetros.</div>
+        <div class="concept-hc" data-es="En salud: permite que médicos o ingenieros biomédicos construyan modelos predictivos a partir de sus propios conjuntos de datos sin necesitar un equipo completo de ML." data-en="In healthcare: lets clinicians or biomedical engineers build predictive models from their own datasets without needing a full ML team.">En salud: permite que médicos o ingenieros biomédicos construyan modelos predictivos a partir de sus propios conjuntos de datos sin necesitar un equipo completo de ML.</div>
+        <div class="concept-pills"><span class="pill pill-teal">AutoML</span><span class="pill pill-teal" data-es="Ajuste de hiperparámetros" data-en="Hyperparameter tuning">Ajuste de hiperparámetros</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div><!-- /tab-concepts -->
+
+<script>
+var currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+
+  // Update all elements with data-es / data-en
+  document.querySelectorAll('[data-es]').forEach(function(el) {
+    var val = lang === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+    if (val !== null) {
+      // Use innerHTML for elements that may contain tags
+      if (el.tagName === 'SPAN' || el.tagName === 'DIV' || el.tagName === 'P' || el.tagName === 'LI' || el.tagName === 'BUTTON') {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    }
+  });
+
+  // Handle h1 span separately (contains em tag)
+  var h1span = document.querySelector('h1 [data-es]');
+  if (h1span) {
+    h1span.innerHTML = lang === 'es' ? h1span.getAttribute('data-es') : h1span.getAttribute('data-en');
+  }
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Init in Spanish
+document.addEventListener('DOMContentLoaded', function(){ setLang('es'); });
+</script>
+</body>
+</html>
