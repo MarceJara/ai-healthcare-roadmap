@@ -68,6 +68,7 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
 .pill-teal{background:var(--teal-light);color:#085041;}
 .pill-blue{background:var(--blue-light);color:var(--blue);}
 .pill-purple{background:var(--purple-light);color:var(--purple);}
+.pill-amber{background:var(--amber-light);color:var(--amber);}
 .hc-note{font-size:11px;color:var(--ink-soft);line-height:1.5;border-left:2px solid var(--teal-mid);padding-left:9px;margin-bottom:14px;font-weight:300;}
 .instructions{background:var(--surface);border-radius:8px;padding:12px 14px;margin-bottom:14px;}
 .instructions-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px;}
@@ -75,13 +76,14 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
 .instructions li{font-size:11px;color:var(--ink-soft);line-height:1.45;}
 .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border);}
 .price{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--teal);}
+.price.price-paid{color:var(--amber);}
 .link-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:5px 12px;border-radius:7px;text-decoration:none;transition:opacity .15s;}
 .link-btn:hover{opacity:.75;}
 .link-yt{background:#FCEBEB;color:#A32D2D;}
 .link-web{background:var(--surface);color:var(--ink-soft);border:1px solid var(--border);}
 .type-row{display:flex;align-items:center;gap:5px;margin-bottom:10px;}
 .type-dot{width:6px;height:6px;border-radius:50%;}
-.dot-red{background:#E24B4A;}.dot-teal{background:var(--teal);}.dot-purple{background:#534AB7;}
+.dot-red{background:#E24B4A;}.dot-teal{background:var(--teal);}.dot-purple{background:#534AB7;}.dot-amber{background:#D97706;}
 .type-label{font-size:10px;color:var(--ink-muted);font-family:'DM Mono',monospace;}
 
 /* CONCEPTS */
@@ -101,6 +103,68 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
 .concept-hc{font-size:11px;color:var(--teal);background:var(--teal-light);border-radius:6px;padding:6px 10px;display:inline-block;line-height:1.45;}
 .concept-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
 
+/* ══════════════════════════════════════
+   WORKSHOPS TAB
+══════════════════════════════════════ */
+.workshops-wrap{padding:36px 48px 48px;max-width:1100px;margin:0 auto;}
+.workshops-intro{font-size:13px;color:var(--ink-muted);margin-bottom:8px;line-height:1.6;}
+
+/* filter bar */
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;margin-top:16px;}
+.filter-btn{font-family:'DM Mono',monospace;font-size:10px;padding:5px 14px;border-radius:999px;border:1px solid var(--border);background:var(--white);color:var(--ink-muted);cursor:pointer;transition:all .15s;letter-spacing:.03em;}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.filter-btn.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+
+/* workshop grid */
+.workshop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
+
+/* workshop card */
+.wcard{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:0;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden;}
+.wcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.wcard.wfeatured{border-color:var(--teal-mid);}
+.wcard.wfeatured .wcard-top{background:linear-gradient(135deg,#0d5c44 0%,#1D9E75 100%);}
+.wcard.wonline .wcard-top{background:linear-gradient(135deg,#1a3a6b 0%,#185FA5 100%);}
+.wcard.winperson .wcard-top{background:linear-gradient(135deg,#4a2006 0%,#854F0B 100%);}
+
+.wcard-top{padding:16px 18px 14px;color:#fff;position:relative;}
+.wcard-top::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:rgba(255,255,255,.12);}
+.wtag-row{display:flex;align-items:center;gap:6px;margin-bottom:10px;}
+.wtag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:4px;font-weight:500;}
+.wtag-online{background:rgba(255,255,255,.18);color:rgba(255,255,255,.9);}
+.wtag-inperson{background:rgba(255,200,80,.25);color:#FFD87A;}
+.wtag-hybrid{background:rgba(160,100,255,.25);color:#D4BCFF;}
+.wtag-new{background:rgba(29,158,117,.35);color:#A0FFDB;}
+.wcard-title{font-size:14px;font-weight:500;line-height:1.3;color:#fff;margin-bottom:3px;}
+.wcard-org{font-size:11px;color:rgba(255,255,255,.6);font-weight:300;}
+
+.wcard-body{padding:14px 18px;flex:1;display:flex;flex-direction:column;}
+.wdate-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.wdate{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);}
+.wdate-sep{font-size:9px;color:var(--border);}
+.wlocation{font-size:10px;color:var(--ink-muted);display:flex;align-items:center;gap:3px;}
+.wpills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
+.whc-note{font-size:11px;color:var(--ink-soft);line-height:1.5;border-left:2px solid var(--teal-mid);padding-left:9px;margin-bottom:12px;font-weight:300;flex:1;}
+.wcard-footer{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border);margin-top:auto;}
+.wprice-wrap{display:flex;flex-direction:column;gap:1px;}
+.wprice{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;}
+.wprice.free{color:var(--teal);}
+.wprice.paid{color:var(--amber);}
+.wprice-note{font-size:9px;color:var(--ink-muted);}
+.wdeadline{font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-muted);background:var(--surface);padding:3px 8px;border-radius:4px;border:1px solid var(--border);}
+.wdeadline.urgent{color:#c0392b;background:#fdf0ee;border-color:#f5c6c1;}
+
+/* price summary bar */
+.price-summary{margin-bottom:24px;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 20px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;}
+.psummary-item{display:flex;flex-direction:column;gap:2px;}
+.psummary-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);}
+.psummary-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--ink);}
+.psummary-val.free{color:var(--teal);}
+.psummary-val.paid{color:var(--amber);}
+.psummary-divider{width:1px;height:32px;background:var(--border);}
+
+/* hidden workshop cards */
+.wcard.hidden{display:none;}
+
 /* LEGEND + FOOTER */
 .legend{margin:0 48px;padding:16px 20px;background:var(--white);border:1px solid var(--border);border-radius:10px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
 .legend-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);}
@@ -110,17 +174,77 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
 .footer-left{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-muted);}
 .footer-right{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);}
 
-/* LANG HIDE */
-[data-lang]{transition:opacity .2s;}
+/* ══════════════════════════════════════
+   ALL RESOURCES TAB
+══════════════════════════════════════ */
+.allres-wrap{padding:36px 48px 56px;max-width:1100px;margin:0 auto;}
+.allres-intro{font-size:13px;color:var(--ink-muted);line-height:1.6;margin-bottom:24px;}
+
+/* section headers */
+.allres-section{margin-bottom:40px;}
+.allres-section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.allres-section-icon{font-size:18px;line-height:1;}
+.allres-section-title{font-family:'DM Serif Display',serif;font-size:18px;font-weight:400;}
+.allres-section-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-muted);background:var(--surface);padding:3px 10px;border-radius:999px;border:1px solid var(--border);margin-left:auto;}
+
+/* resource rows — compact list style */
+.res-list{display:flex;flex-direction:column;gap:8px;}
+.res-row{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:13px 16px;display:flex;align-items:flex-start;gap:14px;transition:box-shadow .15s,transform .15s;text-decoration:none;color:inherit;}
+.res-row:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);transform:translateY(-1px);}
+.res-row.res-featured{border-left:3px solid var(--teal);}
+.res-row.res-new{border-left:3px solid var(--amber);}
+
+.res-type-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.rdot-video{background:#E24B4A;}
+.rdot-course{background:var(--teal);}
+.rdot-lab{background:var(--purple);}
+.rdot-workshop{background:var(--amber);}
+.rdot-webinar{background:#185FA5;}
+.rdot-data{background:#2E7D32;}
+.rdot-tool{background:#6D4C41;}
+
+.res-body{flex:1;min-width:0;}
+.res-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:2px;line-height:1.3;}
+.res-meta{font-size:10px;color:var(--ink-muted);font-family:'DM Mono',monospace;margin-bottom:5px;}
+.res-desc{font-size:11px;color:var(--ink-soft);line-height:1.5;}
+.res-pills{display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;}
+
+.res-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
+.res-price{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;white-space:nowrap;}
+.res-price.free{color:var(--teal);}
+.res-price.paid{color:var(--amber);}
+.res-price.tba{color:var(--ink-muted);}
+.res-link{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:500;padding:4px 10px;border-radius:6px;text-decoration:none;background:var(--surface);color:var(--ink-soft);border:1px solid var(--border);transition:opacity .15s;white-space:nowrap;}
+.res-link:hover{opacity:.7;}
+.res-link.yt{background:#FCEBEB;color:#A32D2D;border-color:#f5c6c1;}
+
+/* search / filter */
+.allres-controls{display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap;}
+.allres-search{flex:1;min-width:180px;font-family:'Outfit',sans-serif;font-size:12px;padding:8px 14px;border-radius:8px;border:1px solid var(--border);background:var(--white);color:var(--ink);outline:none;}
+.allres-search:focus{border-color:var(--teal);}
+.allres-filter{font-family:'DM Mono',monospace;font-size:10px;padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:var(--white);color:var(--ink-muted);cursor:pointer;transition:all .15s;}
+.allres-filter:hover,.allres-filter.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+.allres-total{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-muted);margin-left:auto;}
+
+/* source callout */
+.source-callout{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:14px;display:flex;gap:14px;align-items:flex-start;}
+.source-callout-icon{font-size:22px;flex-shrink:0;line-height:1.2;}
+.source-callout-body{}
+.source-callout-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:3px;}
+.source-callout-title{font-size:13px;font-weight:500;margin-bottom:3px;}
+.source-callout-desc{font-size:11px;color:var(--ink-soft);line-height:1.5;}
+.source-callout-link{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--teal);text-decoration:none;margin-top:6px;font-family:'DM Mono',monospace;}
+.source-callout-link:hover{text-decoration:underline;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 .header{animation:fadeUp .4s ease both;}
 
 @media(max-width:600px){
-  .header,.phases,.concepts-wrap,.legend,.footer{padding-left:20px;padding-right:20px;}
+  .header,.phases,.concepts-wrap,.workshops-wrap,.legend,.footer{padding-left:20px;padding-right:20px;}
   .lang-bar{padding:10px 20px 0;}
   .tab-bar{padding:0 20px;overflow-x:auto;}
   .phase-header{flex-wrap:wrap;}.phase-time{margin-left:0;}
+  .workshop-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -153,6 +277,8 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('roadmap',this)" data-es="📍 Hoja de ruta" data-en="📍 Roadmap">📍 Hoja de ruta</button>
   <button class="tab-btn" onclick="switchTab('concepts',this)" data-es="🧠 Conceptos clave" data-en="🧠 Key concepts">🧠 Conceptos clave</button>
+  <button class="tab-btn" onclick="switchTab('workshops',this)" data-es="🎓 Workshops & Precios" data-en="🎓 Workshops & Prices">🎓 Workshops & Precios</button>
+  <button class="tab-btn" onclick="switchTab('allresources',this)" data-es="📋 Todos los recursos" data-en="📋 All Resources">📋 Todos los recursos</button>
 </div>
 
 <!-- ═══════ TAB 1: ROADMAP ═══════ -->
@@ -171,7 +297,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
     </div>
     <div class="cards">
 
-      <!-- Card 1 -->
       <div class="card featured">
         <div class="card-step">01 / 07 <span class="featured-badge" data-es="Empieza aquí" data-en="Start here">Empieza aquí</span></div>
         <div class="type-row"><span class="type-dot dot-red"></span><span class="type-label">YouTube · 1 hr · <span data-es="Público general" data-en="General audience">Público general</span></span></div>
@@ -190,7 +315,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
         </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="card">
         <div class="card-step">02 / 07</div>
         <div class="type-row"><span class="type-dot dot-red"></span><span class="type-label">YouTube · ~62 min · <span data-es="Matemáticas animadas" data-en="Animated math">Matemáticas animadas</span></span></div>
@@ -208,7 +332,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
         </div>
       </div>
 
-      <!-- Card 3 -->
       <div class="card">
         <div class="card-step">03 / 07</div>
         <div class="type-row"><span class="type-dot dot-red"></span><span class="type-label">YouTube · ~8 min · Lightboard</span></div>
@@ -227,7 +350,7 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
 
     </div>
-  </div><!-- /phase 1 -->
+  </div>
 
   <div class="connector-line"></div>
 
@@ -243,7 +366,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
     </div>
     <div class="cards">
 
-      <!-- Card 4 -->
       <div class="card featured">
         <div class="card-step">04 / 07 <span class="featured-badge" data-es="Mayor cobertura" data-en="Broadest coverage">Mayor cobertura</span></div>
         <div class="type-row"><span class="type-dot dot-teal"></span><span class="type-label"><span data-es="Curso gratuito · MIT OCW · A tu ritmo" data-en="Free course · MIT OCW · Self-paced">Curso gratuito · MIT OCW · A tu ritmo</span></span></div>
@@ -272,7 +394,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
         </div>
       </div>
 
-      <!-- Card 5 -->
       <div class="card">
         <div class="card-step">05 / 07</div>
         <div class="type-row"><span class="type-dot dot-teal"></span><span class="type-label"><span data-es="MOOC gratuito · Elige 2–3 · 1–2 hr c/u" data-en="Free MOOC · Pick 2–3 · 1–2 hr each">MOOC gratuito · Elige 2–3 · 1–2 hr c/u</span></span></div>
@@ -299,7 +420,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
         </div>
       </div>
 
-      <!-- Card 6 -->
       <div class="card">
         <div class="card-step">06 / 07</div>
         <div class="type-row"><span class="type-dot dot-purple"></span><span class="type-label"><span data-es="Archivo de tutoriales · Videos ICML / NeurIPS" data-en="Tutorial archive · ICML / NeurIPS videos">Archivo de tutoriales · Videos ICML / NeurIPS</span></span></div>
@@ -326,7 +446,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
         </div>
       </div>
 
-      <!-- Card 7 -->
       <div class="card">
         <div class="card-step">07 / 07</div>
         <div class="type-row"><span class="type-dot dot-teal"></span><span class="type-label">MOOC · Coursera · ~6 hr · <span data-es="Sin matemáticas" data-en="No math">Sin matemáticas</span></span></div>
@@ -354,11 +473,10 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
 
     </div>
-  </div><!-- /phase 2 -->
+  </div>
 
-</div><!-- /phases -->
+</div>
 
-<!-- LEGEND -->
 <div class="legend" style="margin-bottom:0;">
   <span class="legend-title" data-es="Clave de temas" data-en="Topic key">Clave de temas</span>
   <div class="legend-item"><div class="legend-swatch" style="background:#E1F5EE;border:1px solid #9FE1CB;"></div><span data-es="Temas núcleo CCAIM" data-en="CCAIM core topics">Temas núcleo CCAIM</span></div>
@@ -370,7 +488,7 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
   <div class="footer-left" data-es="Compilado para la preparación de CCAIM ML for Healthcare 2026" data-en="Compiled for CCAIM ML for Healthcare 2026 preparation">Compilado para la preparación de CCAIM ML for Healthcare 2026</div>
   <div class="footer-right" data-es="Recursos verificados gratuitos · Mayo 2026" data-en="All resources verified free · May 2026">Recursos verificados gratuitos · Mayo 2026</div>
 </div>
-</div><!-- /tab-roadmap -->
+</div>
 
 
 <!-- ═══════ TAB 2: CONCEPTS ═══════ -->
@@ -380,7 +498,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
 
   <div style="position:relative;">
 
-    <!-- 01 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-blue">01</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -392,7 +509,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 02 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-blue">02</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -404,7 +520,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 03 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-blue">03</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -416,7 +531,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 04 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-blue">04</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -428,7 +542,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 05 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-teal">05</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -440,7 +553,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 06 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-teal">06</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -452,7 +564,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 07 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-teal">07</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -464,7 +575,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 08 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-amber">08</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -476,7 +586,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 09 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-amber">09</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -488,7 +597,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 10 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-teal">10</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -500,7 +608,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 11 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-teal">11</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -512,7 +619,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 12 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-teal">12</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -524,7 +630,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 13 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-teal">13</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -536,7 +641,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 14 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-amber">14</div><div class="concept-line"></div></div>
       <div class="concept-body">
@@ -548,7 +652,6 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
       </div>
     </div>
 
-    <!-- 15 -->
     <div class="concept-item">
       <div class="concept-num-wrap"><div class="concept-num cn-amber">15</div></div>
       <div class="concept-body" style="padding-bottom:0;">
@@ -562,7 +665,230 @@ body{font-family:'Outfit',sans-serif;background:var(--surface);color:var(--ink);
 
   </div>
 </div>
-</div><!-- /tab-concepts -->
+</div>
+
+
+<!-- ═══════ TAB 3: WORKSHOPS ═══════ -->
+<div id="tab-workshops" class="tab-panel">
+<div class="workshops-wrap">
+
+  <p class="workshops-intro" data-es="Summer schools y workshops intensivos con sesiones prácticas — verificados para 2026. Filtra por formato o temática." data-en="Summer schools and intensive hands-on workshops — verified for 2026. Filter by format or topic.">Summer schools y workshops intensivos con sesiones prácticas — verificados para 2026. Filtra por formato o temática.</p>
+
+  <!-- PRICE SUMMARY BAR -->
+  <div class="price-summary">
+    <div class="psummary-item">
+      <div class="psummary-label" data-es="Rango de precio" data-en="Price range">Rango de precio</div>
+      <div class="psummary-val paid" data-es="£150 – €850" data-en="£150 – €850">£150 – €850</div>
+    </div>
+    <div class="psummary-divider"></div>
+    <div class="psummary-item">
+      <div class="psummary-label" data-es="Opción más económica" data-en="Lowest cost">Opción más económica</div>
+      <div class="psummary-val free">ELLIS Manchester · £150</div>
+    </div>
+    <div class="psummary-divider"></div>
+    <div class="psummary-item">
+      <div class="psummary-label" data-es="Online disponibles" data-en="Online options">Online disponibles</div>
+      <div class="psummary-val">2 de 5</div>
+    </div>
+    <div class="psummary-divider"></div>
+    <div class="psummary-item">
+      <div class="psummary-label" data-es="Con sesiones prácticas" data-en="With hands-on labs">Con sesiones prácticas</div>
+      <div class="psummary-val">5 de 5</div>
+    </div>
+    <div class="psummary-divider"></div>
+    <div class="psummary-item">
+      <div class="psummary-label" data-es="Próximo deadline" data-en="Nearest deadline">Próximo deadline</div>
+      <div class="psummary-val" style="color:#c0392b;" data-es="CCAIM · Sep 7" data-en="CCAIM · Sep 7">CCAIM · Sep 7</div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterWorkshops('all',this)" data-es="Todos (5)" data-en="All (5)">Todos (5)</button>
+    <button class="filter-btn" onclick="filterWorkshops('online',this)" data-es="🌐 Online" data-en="🌐 Online">🌐 Online</button>
+    <button class="filter-btn" onclick="filterWorkshops('inperson',this)" data-es="📍 Presencial" data-en="📍 In-person">📍 Presencial</button>
+    <button class="filter-btn" onclick="filterWorkshops('clinicians',this)" data-es="🩺 Para clínicos" data-en="🩺 For clinicians">🩺 Para clínicos</button>
+    <button class="filter-btn" onclick="filterWorkshops('technical',this)" data-es="⚙️ Técnico / ML" data-en="⚙️ Technical / ML">⚙️ Técnico / ML</button>
+    <button class="filter-btn" onclick="filterWorkshops('imaging',this)" data-es="🖼️ Medical Imaging" data-en="🖼️ Medical Imaging">🖼️ Medical Imaging</button>
+  </div>
+
+  <!-- WORKSHOP GRID -->
+  <div class="workshop-grid" id="workshop-grid">
+
+    <!-- CARD 1: CCAIM ML for Healthcare -->
+    <div class="wcard wfeatured" data-format="online" data-topic="technical">
+      <div class="wcard-top">
+        <div class="wtag-row">
+          <span class="wtag wtag-online" data-es="🌐 Online · Zoom" data-en="🌐 Online · Zoom">🌐 Online · Zoom</span>
+          <span class="wtag wtag-new" data-es="⭐ Referencia CCAIM" data-en="⭐ CCAIM Reference">⭐ Referencia CCAIM</span>
+        </div>
+        <div class="wcard-title">CCAIM ML for Healthcare Summer School 2026</div>
+        <div class="wcard-org">Cambridge Centre for AI in Medicine · van der Schaar Lab</div>
+      </div>
+      <div class="wcard-body">
+        <div class="wdate-row">
+          <span class="wdate">7–11 Sep 2026</span>
+          <span class="wdate-sep">·</span>
+          <span class="wlocation">🌐 <span data-es="Online (zona horaria UK)" data-en="Online (UK time)">Online (zona horaria UK)</span></span>
+        </div>
+        <div class="wpills">
+          <span class="pill pill-teal">Causal AI</span>
+          <span class="pill pill-teal">Time-Series</span>
+          <span class="pill pill-blue">LLMs</span>
+          <span class="pill pill-purple" data-es="Datos sintéticos" data-en="Synthetic data">Datos sintéticos</span>
+          <span class="pill pill-teal">AutoML</span>
+        </div>
+        <div class="whc-note" data-es="5 días intensivos online, con charlas de Cambridge, Stanford y TU Munich. Cubre todos los temas del tab de conceptos: IA causal, gemelos digitales, NLP clínico, Responsible AI. Sesiones en vivo vía Zoom de 9:30–17:30 UK." data-en="5 intensive online days, with talks from Cambridge, Stanford, and TU Munich. Covers every concept in the concepts tab: causal AI, digital twins, clinical NLP, Responsible AI. Live Zoom sessions 9:30–17:30 UK time.">5 días intensivos online, con charlas de Cambridge, Stanford y TU Munich. Cubre todos los temas del tab de conceptos: IA causal, gemelos digitales, NLP clínico, Responsible AI. Sesiones en vivo vía Zoom de 9:30–17:30 UK.</div>
+        <div class="wcard-footer">
+          <div class="wprice-wrap">
+            <span class="wprice paid" data-es="Precio TBA · Early Bird abierto" data-en="Price TBA · Early Bird open">Precio TBA · Early Bird abierto</span>
+            <span class="wprice-note" data-es="Descuento disponible ahora" data-en="Discount available now">Descuento disponible ahora</span>
+          </div>
+          <a class="link-btn link-web" href="https://www.vanderschaar-lab.com/ml-healthcare-summer-school-2026/" target="_blank">↗ <span data-es="Registrarse" data-en="Register">Registrarse</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: CCAIM Clinical AI -->
+    <div class="wcard wonline" data-format="online" data-topic="clinicians">
+      <div class="wcard-top">
+        <div class="wtag-row">
+          <span class="wtag wtag-online" data-es="🌐 Online · Sin código" data-en="🌐 Online · No coding">🌐 Online · Sin código</span>
+        </div>
+        <div class="wcard-title">CCAIM Clinical AI Summer School 2026</div>
+        <div class="wcard-org">Cambridge Centre for AI in Medicine</div>
+      </div>
+      <div class="wcard-body">
+        <div class="wdate-row">
+          <span class="wdate">18–20 Sep 2026</span>
+          <span class="wdate-sep">·</span>
+          <span class="wlocation">🌐 <span data-es="Online · Fin de semana" data-en="Online · Weekend">Online · Fin de semana</span></span>
+        </div>
+        <div class="wpills">
+          <span class="pill pill-blue">LLMs en salud</span>
+          <span class="pill pill-teal">Generative AI</span>
+          <span class="pill pill-teal">Responsible AI</span>
+          <span class="pill pill-amber" data-es="Para médicos" data-en="For clinicians">Para médicos</span>
+        </div>
+        <div class="whc-note" data-es="Diseñado para médicos y estudiantes de medicina sin experiencia previa en IA. Un fin de semana de inmersión en LLMs y GenAI para salud, sin programación. Ideal si vienes del lado clínico." data-en="Designed for physicians and medical students with no prior AI experience. A weekend deep-dive into LLMs and GenAI for healthcare — no coding required. Ideal if you're coming from the clinical side.">Diseñado para médicos y estudiantes de medicina sin experiencia previa en IA. Un fin de semana de inmersión en LLMs y GenAI para salud, sin programación. Ideal si vienes del lado clínico.</div>
+        <div class="wcard-footer">
+          <div class="wprice-wrap">
+            <span class="wprice paid" data-es="Precio TBA · Early Bird abierto" data-en="Price TBA · Early Bird open">Precio TBA · Early Bird abierto</span>
+            <span class="wprice-note" data-es="Ver página de Cambridge" data-en="See Cambridge page">Ver página de Cambridge</span>
+          </div>
+          <a class="link-btn link-web" href="https://www.vanderschaar-lab.com/clinical-summer-school-2026/" target="_blank">↗ <span data-es="Registrarse" data-en="Register">Registrarse</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: ELLIS Manchester -->
+    <div class="wcard winperson" data-format="inperson" data-topic="technical">
+      <div class="wcard-top">
+        <div class="wtag-row">
+          <span class="wtag wtag-inperson" data-es="📍 Presencial · Manchester" data-en="📍 In-person · Manchester">📍 Presencial · Manchester</span>
+        </div>
+        <div class="wcard-title">ELLIS Summer School on ML for Healthcare &amp; Biology 2026</div>
+        <div class="wcard-org">ELLIS Unit Manchester · University of Manchester</div>
+      </div>
+      <div class="wcard-body">
+        <div class="wdate-row">
+          <span class="wdate">7–9 Jul 2026</span>
+          <span class="wdate-sep">·</span>
+          <span class="wlocation">📍 Alan Turing Building, Manchester</span>
+        </div>
+        <div class="wpills">
+          <span class="pill pill-teal">Causal ML</span>
+          <span class="pill pill-teal" data-es="ML probabilístico" data-en="Probabilistic ML">ML probabilístico</span>
+          <span class="pill pill-purple">EHR</span>
+          <span class="pill pill-teal" data-es="Sesiones prácticas" data-en="Hands-on labs">Sesiones prácticas</span>
+        </div>
+        <div class="whc-note" data-es="3 días con charlas por la mañana y sesiones de laboratorio práctico por la tarde. Becas disponibles para investigadores de entornos desfavorecidos (cubren matrícula + alojamiento). Programado igual que CCAIM ML — decide entre los dos." data-en="3 days with morning talks and afternoon hands-on lab sessions. Scholarships available for researchers from disadvantaged backgrounds (covers registration + accommodation). Runs same week as CCAIM ML — decide between the two.">3 días con charlas por la mañana y sesiones de laboratorio práctico por la tarde. Becas disponibles para investigadores de entornos desfavorecidos (cubren matrícula + alojamiento). Programado igual que CCAIM ML — decide entre los dos.</div>
+        <div class="wcard-footer">
+          <div class="wprice-wrap">
+            <span class="wprice paid">£150 <span data-es="(early bird)" data-en="(early bird)">(early bird)</span></span>
+            <span class="wprice-note">£300 <span data-es="estándar · £800 empresas" data-en="standard · £800 business">estándar · £800 empresas</span></span>
+          </div>
+          <a class="link-btn link-web" href="https://www.ellismcr.org/ss2026" target="_blank">↗ <span data-es="Registrarse" data-en="Register">Registrarse</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: AI4Imaging Vienna -->
+    <div class="wcard winperson" data-format="inperson" data-topic="imaging technical">
+      <div class="wcard-top">
+        <div class="wtag-row">
+          <span class="wtag wtag-inperson" data-es="📍 Presencial · Viena" data-en="📍 In-person · Vienna">📍 Presencial · Viena</span>
+          <span class="wtag wtag-hybrid" data-es="🔬 Hackathon incluido" data-en="🔬 Hackathon included">🔬 Hackathon incluido</span>
+        </div>
+        <div class="wcard-title">3rd Summer School AI4Imaging 2026</div>
+        <div class="wcard-org">MedUni Vienna · Radiologie &amp; Nuklearmedizin · CAIM</div>
+      </div>
+      <div class="wcard-body">
+        <div class="wdate-row">
+          <span class="wdate">7–11 Sep 2026</span>
+          <span class="wdate-sep">·</span>
+          <span class="wlocation">📍 <span data-es="Viena, Austria" data-en="Vienna, Austria">Viena, Austria</span></span>
+        </div>
+        <div class="wpills">
+          <span class="pill pill-teal" data-es="Imagen médica" data-en="Medical imaging">Imagen médica</span>
+          <span class="pill pill-teal">Radiomics</span>
+          <span class="pill pill-blue" data-es="IA para diagnóstico" data-en="AI for diagnosis">IA para diagnóstico</span>
+          <span class="pill pill-teal" data-es="Hackathon clínico" data-en="Clinical hackathon">Hackathon clínico</span>
+        </div>
+        <div class="whc-note" data-es="Charlas por la mañana + assignments prácticos por la tarde. Incluye un hackathon de reto clínico real. Tiene una rama clínica y una técnica — elige según tu perfil. Orientado a investigadores early-career con al menos un abstract publicado." data-en="Morning lectures + afternoon hands-on assignments. Includes a real clinical challenge hackathon. Separate clinical and technical tracks — choose based on your background. Aimed at early-career researchers with at least one published abstract.">Charlas por la mañana + assignments prácticos por la tarde. Incluye un hackathon de reto clínico real. Tiene una rama clínica y una técnica — elige según tu perfil. Orientado a investigadores early-career con al menos un abstract publicado.</div>
+        <div class="wcard-footer">
+          <div class="wprice-wrap">
+            <span class="wprice paid">€850</span>
+            <span class="wprice-note" data-es="Deadline inscripción: 27 May 2026" data-en="Registration deadline: 27 May 2026">Deadline inscripción: 27 May 2026</span>
+          </div>
+          <a class="link-btn link-web" href="https://ai4imaging.org/" target="_blank">↗ <span data-es="Ver programa" data-en="View programme">Ver programa</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5: Digital Health Summer Schools UK -->
+    <div class="wcard winperson" data-format="inperson" data-topic="clinicians technical">
+      <div class="wcard-top">
+        <div class="wtag-row">
+          <span class="wtag wtag-inperson" data-es="📍 Presencial · Nottingham" data-en="📍 In-person · Nottingham">📍 Presencial · Nottingham</span>
+          <span class="wtag wtag-new" data-es="🎯 Formato renovado 2026" data-en="🎯 Refreshed 2026 format">🎯 Formato renovado 2026</span>
+        </div>
+        <div class="wcard-title">Digital Health Summer Schools 2026</div>
+        <div class="wcard-org">Digital Health · University of Nottingham</div>
+      </div>
+      <div class="wcard-body">
+        <div class="wdate-row">
+          <span class="wdate">16–17 Jul 2026</span>
+          <span class="wdate-sep">·</span>
+          <span class="wlocation">📍 <span data-es="U. de Nottingham, UK" data-en="U. of Nottingham, UK">U. de Nottingham, UK</span></span>
+        </div>
+        <div class="wpills">
+          <span class="pill pill-teal" data-es="Liderazgo digital" data-en="Digital leadership">Liderazgo digital</span>
+          <span class="pill pill-blue" data-es="IA segura en salud" data-en="Safe AI in healthcare">IA segura en salud</span>
+          <span class="pill pill-teal">Responsible AI</span>
+          <span class="pill pill-teal" data-es="Grupos pequeños" data-en="Small groups">Grupos pequeños</span>
+        </div>
+        <div class="whc-note" data-es="Formato rediseñado en 2026: sesiones en grupos pequeños e interactivas (menos conferencias masivas, más intercambio real de conocimiento). Temas: IA segura, escalado de innovación, liderazgo digital. Patrocinado por AWS, Microsoft, InterSystems." data-en="Redesigned 2026 format: small-group and interactive sessions (fewer big-room lectures, more real knowledge exchange). Topics: safe AI, scaling innovation, digital leadership. Sponsored by AWS, Microsoft, InterSystems.">Formato rediseñado en 2026: sesiones en grupos pequeños e interactivas (menos conferencias masivas, más intercambio real de conocimiento). Temas: IA segura, escalado de innovación, liderazgo digital. Patrocinado por AWS, Microsoft, InterSystems.</div>
+        <div class="wcard-footer">
+          <div class="wprice-wrap">
+            <span class="wprice paid">£399+ <span data-es="(+IVA · desde)" data-en="(+VAT · from)">(+IVA · desde)</span></span>
+            <span class="wprice-note" data-es="Ticket 2 días: £659+IVA" data-en="2-day full ticket: £659+VAT">Ticket 2 días: £659+IVA</span>
+          </div>
+          <a class="link-btn link-web" href="https://www.digitalhealth.net/" target="_blank">↗ <span data-es="Ver evento" data-en="View event">Ver evento</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /workshop-grid -->
+
+  <!-- NOTE -->
+  <div style="margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-muted);line-height:1.7;">
+    <span data-es="⚠️ Precios verificados en Mayo 2026. CCAIM (ambas ediciones) aún no ha publicado precio final — consulta las páginas de registro para el precio exacto y descuento Early Bird." data-en="⚠️ Prices verified May 2026. CCAIM (both editions) has not yet published final pricing — check registration pages for exact price and Early Bird discount.">⚠️ Precios verificados en Mayo 2026. CCAIM (ambas ediciones) aún no ha publicado precio final — consulta las páginas de registro para el precio exacto y descuento Early Bird.</span>
+  </div>
+
+</div>
+</div><!-- /tab-workshops -->
+
 
 <script>
 var currentLang = 'es';
@@ -572,25 +898,16 @@ function setLang(lang) {
   document.getElementById('btn-es').classList.toggle('active', lang === 'es');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
   document.documentElement.lang = lang === 'es' ? 'es' : 'en';
-
-  // Update all elements with data-es / data-en
   document.querySelectorAll('[data-es]').forEach(function(el) {
     var val = lang === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
     if (val !== null) {
-      // Use innerHTML for elements that may contain tags
-      if (el.tagName === 'SPAN' || el.tagName === 'DIV' || el.tagName === 'P' || el.tagName === 'LI' || el.tagName === 'BUTTON') {
+      if (el.tagName === 'SPAN' || el.tagName === 'DIV' || el.tagName === 'P' || el.tagName === 'LI' || el.tagName === 'BUTTON' || el.tagName === 'A') {
         el.innerHTML = val;
       } else {
         el.textContent = val;
       }
     }
   });
-
-  // Handle h1 span separately (contains em tag)
-  var h1span = document.querySelector('h1 [data-es]');
-  if (h1span) {
-    h1span.innerHTML = lang === 'es' ? h1span.getAttribute('data-es') : h1span.getAttribute('data-en');
-  }
 }
 
 function switchTab(name, btn) {
@@ -600,8 +917,399 @@ function switchTab(name, btn) {
   btn.classList.add('active');
 }
 
-// Init in Spanish
+function filterWorkshops(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var cards = document.querySelectorAll('#workshop-grid .wcard');
+  cards.forEach(function(card) {
+    if (type === 'all') {
+      card.classList.remove('hidden');
+    } else if (type === 'online') {
+      card.classList.toggle('hidden', card.getAttribute('data-format') !== 'online');
+    } else if (type === 'inperson') {
+      card.classList.toggle('hidden', card.getAttribute('data-format') !== 'inperson');
+    } else {
+      var topic = card.getAttribute('data-topic') || '';
+      card.classList.toggle('hidden', topic.indexOf(type) === -1);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function(){ setLang('es'); });
+
+/* ── All Resources search / filter ── */
+function allResSearch() {
+  var q = (document.getElementById('allres-search-input')||{value:''}).value.toLowerCase();
+  var active = document.querySelector('.allres-filter.active');
+  var typeFilter = active ? active.getAttribute('data-type') : 'all';
+  var rows = document.querySelectorAll('.res-row[data-tags]');
+  var visible = 0;
+  rows.forEach(function(row) {
+    var tags = (row.getAttribute('data-tags')||'').toLowerCase();
+    var title = (row.querySelector('.res-title')||{textContent:''}).textContent.toLowerCase();
+    var desc = (row.querySelector('.res-desc')||{textContent:''}).textContent.toLowerCase();
+    var matchType = typeFilter === 'all' || tags.indexOf(typeFilter) !== -1;
+    var matchQ = !q || title.indexOf(q) !== -1 || desc.indexOf(q) !== -1 || tags.indexOf(q) !== -1;
+    var show = matchType && matchQ;
+    row.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  var tot = document.getElementById('allres-total');
+  if (tot) tot.textContent = visible + ' recursos';
+}
+
+function allResFilter(btn, type) {
+  document.querySelectorAll('.allres-filter').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  allResSearch();
+}
 </script>
+<!-- ═══════ TAB 4: ALL RESOURCES ═══════ -->
+<div id="tab-allresources" class="tab-panel">
+<div class="allres-wrap">
+
+  <p class="allres-intro" data-es="Vista consolidada de todos los recursos del kit — autoestudio, workshops, webinars, datos y herramientas. Incluye recursos de UF Health AI y Anthropic." data-en="Consolidated view of every resource in the kit — self-study, workshops, webinars, data & tools. Includes resources from UF Health AI and Anthropic.">Vista consolidada de todos los recursos del kit — autoestudio, workshops, webinars, datos y herramientas. Incluye recursos de UF Health AI y Anthropic.</p>
+
+  <!-- CONTROLS -->
+  <div class="allres-controls">
+    <input class="allres-search" id="allres-search-input" type="text" placeholder="Buscar recurso..." oninput="allResSearch()" data-es-placeholder="Buscar recurso..." data-en-placeholder="Search resource...">
+    <button class="allres-filter active" data-type="all" onclick="allResFilter(this,'all')" data-es="Todos" data-en="All">Todos</button>
+    <button class="allres-filter" data-type="video" onclick="allResFilter(this,'video')" data-es="📹 Video" data-en="📹 Video">📹 Video</button>
+    <button class="allres-filter" data-type="course" onclick="allResFilter(this,'course')" data-es="📚 Curso" data-en="📚 Course">📚 Curso</button>
+    <button class="allres-filter" data-type="workshop" onclick="allResFilter(this,'workshop')" data-es="🎓 Workshop" data-en="🎓 Workshop">🎓 Workshop</button>
+    <button class="allres-filter" data-type="webinar" onclick="allResFilter(this,'webinar')" data-es="🎙️ Webinar" data-en="🎙️ Webinar">🎙️ Webinar</button>
+    <button class="allres-filter" data-type="data" onclick="allResFilter(this,'data')" data-es="🗄️ Datos / Tools" data-en="🗄️ Data / Tools">🗄️ Datos / Tools</button>
+    <span class="allres-total" id="allres-total">17 recursos</span>
+  </div>
+
+  <!-- ── SECTION 1: Self-study videos ── -->
+  <div class="allres-section">
+    <div class="allres-section-header">
+      <span class="allres-section-icon">📹</span>
+      <span class="allres-section-title" data-es="Videos de autoestudio" data-en="Self-study videos">Videos de autoestudio</span>
+      <span class="allres-section-count" data-es="3 recursos · Fase 1" data-en="3 resources · Phase 1">3 recursos · Fase 1</span>
+    </div>
+    <div class="res-list">
+
+      <div class="res-row res-featured" data-tags="video llm rag hallucinations free">
+        <div class="res-type-dot rdot-video"></div>
+        <div class="res-body">
+          <div class="res-title">Karpathy — Intro to Large Language Models</div>
+          <div class="res-meta">YouTube · 1 hr · Andrej Karpathy (OpenAI co-founder)</div>
+          <div class="res-desc" data-es="LLMs de principio a fin: cómo funcionan, alucinaciones y por qué RAG es crítico en sistemas clínicos." data-en="LLMs end-to-end: how they work, hallucinations, and why RAG is critical in clinical systems.">LLMs de principio a fin: cómo funcionan, alucinaciones y por qué RAG es crítico en sistemas clínicos.</div>
+          <div class="res-pills"><span class="pill pill-blue">LLMs</span><span class="pill pill-blue">RAG</span><span class="pill pill-teal" data-es="Alucinaciones" data-en="Hallucinations">Alucinaciones</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free</span>
+          <a class="res-link yt" href="https://www.youtube.com/watch?v=zjkBMFhNj_g" target="_blank">▶ <span data-es="Ver" data-en="Watch">Ver</span></a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="video transformers attention embeddings free">
+        <div class="res-type-dot rdot-video"></div>
+        <div class="res-body">
+          <div class="res-title">3Blue1Brown — Transformers playlist</div>
+          <div class="res-meta">YouTube · ~62 min · 3 videos · Grant Sanderson</div>
+          <div class="res-desc" data-es="Intuición visual animada de transformers, attention y embeddings. Sin matemáticas previas." data-en="Animated visual intuition for transformers, attention, and embeddings. No math background needed.">Intuición visual animada de transformers, attention y embeddings. Sin matemáticas previas.</div>
+          <div class="res-pills"><span class="pill pill-blue">Transformers</span><span class="pill pill-blue">Attention</span><span class="pill pill-blue">Embeddings</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free</span>
+          <a class="res-link yt" href="https://www.youtube.com/watch?v=wjZofJX0v4M" target="_blank">▶ <span data-es="Ver" data-en="Watch">Ver</span></a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="video rag vector-search free">
+        <div class="res-type-dot rdot-video"></div>
+        <div class="res-body">
+          <div class="res-title">IBM Technology — What is RAG?</div>
+          <div class="res-meta">YouTube · ~8 min · IBM / Marina Danilevsky · Lightboard</div>
+          <div class="res-desc" data-es="RAG en 8 min: datos privados de pacientes, guías clínicas y fuentes trazables." data-en="RAG in 8 min: private patient data, clinical guidelines, and traceable sources.">RAG en 8 min: datos privados de pacientes, guías clínicas y fuentes trazables.</div>
+          <div class="res-pills"><span class="pill pill-blue">RAG</span><span class="pill pill-teal" data-es="Búsqueda vectorial" data-en="Vector search">Búsqueda vectorial</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free</span>
+          <a class="res-link yt" href="https://www.youtube.com/watch?v=T-D1OfcDW1M" target="_blank">▶ <span data-es="Ver" data-en="Watch">Ver</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: Courses ── -->
+  <div class="allres-section">
+    <div class="allres-section-header">
+      <span class="allres-section-icon">📚</span>
+      <span class="allres-section-title" data-es="Cursos y MOOCs" data-en="Courses & MOOCs">Cursos y MOOCs</span>
+      <span class="allres-section-count" data-es="4 recursos · Fase 2" data-en="4 resources · Phase 2">4 recursos · Fase 2</span>
+    </div>
+    <div class="res-list">
+
+      <div class="res-row res-featured" data-tags="course causal-inference time-series nlp responsible-ai llm free mit">
+        <div class="res-type-dot rdot-course"></div>
+        <div class="res-body">
+          <div class="res-title">MIT 6.S897 — Machine Learning for Healthcare</div>
+          <div class="res-meta">MIT OpenCourseWare · Self-paced · Videos + slides completos</div>
+          <div class="res-desc" data-es="El recurso único más completo: IA causal, NLP clínico, time-series, Responsible AI — todo anclado en datos clínicos reales." data-en="The single most comprehensive resource: causal AI, clinical NLP, time-series, Responsible AI — all grounded in real clinical data.">El recurso único más completo: IA causal, NLP clínico, time-series, Responsible AI — todo anclado en datos clínicos reales.</div>
+          <div class="res-pills"><span class="pill pill-teal" data-es="Inferencia causal" data-en="Causal inference">Inferencia causal</span><span class="pill pill-teal">Time-Series</span><span class="pill pill-teal">Clinical NLP</span><span class="pill pill-teal">Responsible AI</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free</span>
+          <a class="res-link" href="https://ocw.mit.edu/courses/6-s897-machine-learning-for-healthcare-spring-2019/" target="_blank">↗ OCW</a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="course rag llm generative automl free deeplearning">
+        <div class="res-type-dot rdot-course"></div>
+        <div class="res-body">
+          <div class="res-title">DeepLearning.AI — Short Courses</div>
+          <div class="res-meta">MOOC · Andrew Ng · 1–2 hr por curso · Elige 2–3</div>
+          <div class="res-desc" data-es="Catálogo modular: RAG, Prompt Engineering, AI for Medical Imaging — úsalo como menú por tema." data-en="Modular catalog: RAG, Prompt Engineering, AI for Medical Imaging — use as an on-demand menu.">Catálogo modular: RAG, Prompt Engineering, AI for Medical Imaging — úsalo como menú por tema.</div>
+          <div class="res-pills"><span class="pill pill-blue">RAG</span><span class="pill pill-blue">LLMs</span><span class="pill pill-purple" data-es="Generativo" data-en="Generative">Generativo</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free</span>
+          <a class="res-link" href="https://www.deeplearning.ai/short-courses/" target="_blank">↗ <span data-es="Catálogo" data-en="Catalog">Catálogo</span></a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="course synthetic-data digital-twins time-series automl free cambridge">
+        <div class="res-type-dot rdot-lab"></div>
+        <div class="res-body">
+          <div class="res-title">van der Schaar Lab — Tutorial Archive</div>
+          <div class="res-meta">Cambridge ML · Videos ICML / NeurIPS · A tu ritmo</div>
+          <div class="res-desc" data-es="Gemelos digitales de pacientes, historias clínicas sintéticas, tratamientos individualizados — el mismo lab de CCAIM." data-en="Patient digital twins, synthetic EHRs, individualized treatment — the same lab behind CCAIM.">Gemelos digitales de pacientes, historias clínicas sintéticas, tratamientos individualizados — el mismo lab de CCAIM.</div>
+          <div class="res-pills"><span class="pill pill-purple" data-es="Gemelos digitales" data-en="Digital twins">Gemelos digitales</span><span class="pill pill-purple" data-es="Datos sintéticos" data-en="Synthetic data">Datos sintéticos</span><span class="pill pill-teal">AutoML</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free</span>
+          <a class="res-link" href="https://www.vanderschaar-lab.com/" target="_blank">↗ Lab</a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="course responsible-ai llm strategy free coursera">
+        <div class="res-type-dot rdot-course"></div>
+        <div class="res-body">
+          <div class="res-title">AI for Everyone — Andrew Ng</div>
+          <div class="res-meta">Coursera · ~6 hr · Sin código ni matemáticas · Audit gratuito</div>
+          <div class="res-desc" data-es="Capacidades y límites de la IA desde perspectiva de liderazgo — por qué los proyectos de IA en salud triunfan o fracasan." data-en="AI capabilities and limits from a leadership lens — why healthcare AI projects succeed or fail.">Capacidades y límites de la IA desde perspectiva de liderazgo — por qué los proyectos de IA en salud triunfan o fracasan.</div>
+          <div class="res-pills"><span class="pill pill-teal">Responsible AI</span><span class="pill pill-teal" data-es="Estrategia IA" data-en="AI strategy">Estrategia IA</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free (audit)</span>
+          <a class="res-link" href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">↗ Coursera</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: Workshops / Summer Schools ── -->
+  <div class="allres-section">
+    <div class="allres-section-header">
+      <span class="allres-section-icon">🎓</span>
+      <span class="allres-section-title" data-es="Workshops y Summer Schools 2026" data-en="Workshops & Summer Schools 2026">Workshops y Summer Schools 2026</span>
+      <span class="allres-section-count" data-es="5 eventos · Precio verificado" data-en="5 events · Price verified">5 eventos · Precio verificado</span>
+    </div>
+    <div class="res-list">
+
+      <div class="res-row res-featured" data-tags="workshop causal-ai llm synthetic-data time-series online cambridge ccaim paid">
+        <div class="res-type-dot rdot-workshop"></div>
+        <div class="res-body">
+          <div class="res-title">CCAIM ML for Healthcare Summer School 2026</div>
+          <div class="res-meta">Online · Zoom · 7–11 Sep 2026 · Cambridge / van der Schaar Lab</div>
+          <div class="res-desc" data-es="5 días intensivos online cubriendo todos los conceptos del kit: IA causal, gemelos digitales, LLMs, Responsible AI. Early Bird abierto." data-en="5 intensive online days covering every concept in the kit: causal AI, digital twins, LLMs, Responsible AI. Early Bird open.">5 días intensivos online cubriendo todos los conceptos del kit: IA causal, gemelos digitales, LLMs, Responsible AI. Early Bird abierto.</div>
+          <div class="res-pills"><span class="pill pill-teal">Causal AI</span><span class="pill pill-blue">LLMs</span><span class="pill pill-purple" data-es="Datos sintéticos" data-en="Synthetic data">Datos sintéticos</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price tba">TBA (Early Bird)</span>
+          <a class="res-link" href="https://www.vanderschaar-lab.com/ml-healthcare-summer-school-2026/" target="_blank">↗ <span data-es="Registro" data-en="Register">Registro</span></a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="workshop llm generative-ai online clinicians cambridge ccaim paid no-code">
+        <div class="res-type-dot rdot-workshop"></div>
+        <div class="res-body">
+          <div class="res-title">CCAIM Clinical AI Summer School 2026</div>
+          <div class="res-meta">Online · 18–20 Sep 2026 · Sin código · Para médicos y estudiantes</div>
+          <div class="res-desc" data-es="Fin de semana de inmersión en LLMs y GenAI para salud. Diseñado para clínicos sin experiencia previa en IA." data-en="Weekend deep-dive into LLMs and GenAI for healthcare. Designed for clinicians with no prior AI experience.">Fin de semana de inmersión en LLMs y GenAI para salud. Diseñado para clínicos sin experiencia previa en IA.</div>
+          <div class="res-pills"><span class="pill pill-blue">GenAI</span><span class="pill pill-amber" data-es="Para clínicos" data-en="For clinicians">Para clínicos</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price tba">TBA (Early Bird)</span>
+          <a class="res-link" href="https://www.vanderschaar-lab.com/clinical-summer-school-2026/" target="_blank">↗ <span data-es="Registro" data-en="Register">Registro</span></a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="workshop causal-ml probabilistic ehr hands-on inperson manchester ellis paid">
+        <div class="res-type-dot rdot-workshop"></div>
+        <div class="res-body">
+          <div class="res-title">ELLIS Summer School on ML for Healthcare &amp; Biology 2026</div>
+          <div class="res-meta">Presencial · 7–9 Jul 2026 · Manchester · Becas disponibles</div>
+          <div class="res-desc" data-es="3 días: charlas mañana + labs prácticos tarde. Causal ML, EHR, omics. Becas cubren matrícula y alojamiento para investigadores de entornos desfavorecidos." data-en="3 days: morning talks + afternoon hands-on labs. Causal ML, EHR, omics. Scholarships cover registration + accommodation for researchers from disadvantaged backgrounds.">3 días: charlas mañana + labs prácticos tarde. Causal ML, EHR, omics. Becas cubren matrícula y alojamiento.</div>
+          <div class="res-pills"><span class="pill pill-teal">Causal ML</span><span class="pill pill-purple">EHR</span><span class="pill pill-teal" data-es="Hands-on" data-en="Hands-on">Hands-on</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price paid">£150–£300</span>
+          <a class="res-link" href="https://www.ellismcr.org/ss2026" target="_blank">↗ <span data-es="Registro" data-en="Register">Registro</span></a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="workshop medical-imaging radiomics hackathon hands-on inperson vienna paid">
+        <div class="res-type-dot rdot-workshop"></div>
+        <div class="res-body">
+          <div class="res-title">3rd Summer School AI4Imaging 2026</div>
+          <div class="res-meta">Presencial · 7–11 Sep 2026 · Viena · MedUni Vienna · Deadline: 27 May 2026</div>
+          <div class="res-desc" data-es="Imagen médica AI con hackathon clínico real. Rama clínica y técnica. Para early-career researchers con ≥1 abstract publicado." data-en="Medical AI imaging with real clinical hackathon. Clinical and technical tracks. For early-career researchers with ≥1 published abstract.">Imagen médica AI con hackathon clínico real. Rama clínica y técnica. Early-career researchers.</div>
+          <div class="res-pills"><span class="pill pill-teal" data-es="Imagen médica" data-en="Medical imaging">Imagen médica</span><span class="pill pill-teal">Radiomics</span><span class="pill pill-teal">Hackathon</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price paid">€850</span>
+          <a class="res-link" href="https://ai4imaging.org/" target="_blank">↗ <span data-es="Ver" data-en="View">Ver</span></a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="workshop responsible-ai digital-leadership inperson nottingham paid">
+        <div class="res-type-dot rdot-workshop"></div>
+        <div class="res-body">
+          <div class="res-title">Digital Health Summer Schools 2026</div>
+          <div class="res-meta">Presencial · 16–17 Jul 2026 · Universidad de Nottingham</div>
+          <div class="res-desc" data-es="Sesiones en grupos pequeños: IA segura, escalado de innovación, liderazgo digital. Patrocinado por AWS, Microsoft, InterSystems." data-en="Small-group sessions: safe AI, scaling innovation, digital leadership. Sponsored by AWS, Microsoft, InterSystems.">Sesiones en grupos pequeños: IA segura, escalado de innovación, liderazgo digital.</div>
+          <div class="res-pills"><span class="pill pill-teal">Responsible AI</span><span class="pill pill-teal" data-es="Liderazgo" data-en="Leadership">Liderazgo</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price paid">£399+</span>
+          <a class="res-link" href="https://www.digitalhealth.net/" target="_blank">↗ <span data-es="Ver" data-en="View">Ver</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: NEW — Webinars ── -->
+  <div class="allres-section">
+    <div class="allres-section-header">
+      <span class="allres-section-icon">🎙️</span>
+      <span class="allres-section-title" data-es="Webinars y eventos grabados" data-en="Webinars & recorded events">Webinars y eventos grabados</span>
+      <span class="allres-section-count" data-es="1 recurso · Nuevo" data-en="1 resource · New">1 recurso · Nuevo</span>
+    </div>
+
+    <!-- Source callout -->
+    <div class="source-callout">
+      <div class="source-callout-icon">🤖</div>
+      <div class="source-callout-body">
+        <div class="source-callout-label">Fuente · Anthropic</div>
+        <div class="source-callout-title">Claude Code in Healthcare Webinar Series</div>
+        <div class="source-callout-desc" data-es="Anthropic organiza webinars en vivo donde médicos muestran lo que han construido con Claude Code — herramientas clínicas reales, sin experiencia de programación previa. Las grabaciones quedan disponibles post-evento." data-en="Anthropic hosts live webinars where physicians show what they've built with Claude Code — real clinical tools, no extensive coding background required. Recordings available post-event.">Anthropic organiza webinars en vivo donde médicos muestran lo que han construido con Claude Code — herramientas clínicas reales, sin experiencia de programación previa.</div>
+        <a class="source-callout-link" href="https://www.anthropic.com/webinars/claude-code-in-healthcare-how-physicians-are-building-with-claude" target="_blank">↗ anthropic.com/webinars</a>
+      </div>
+    </div>
+
+    <div class="res-list">
+
+      <div class="res-row res-new" data-tags="webinar llm claude-code clinical-tools physicians free anthropic">
+        <div class="res-type-dot rdot-webinar"></div>
+        <div class="res-body">
+          <div class="res-title">Claude Code in Healthcare: How Physicians Are Building with Claude</div>
+          <div class="res-meta">Webinar grabado · 23 Apr 2026 · Anthropic · Dr. Graham Walker (MDCalc) + Dr. Michał Nedoszytko (Cardiología)</div>
+          <div class="res-desc" data-es="Demos en vivo de herramientas clínicas construidas por médicos con Claude Code. Temas: auditabilidad, compliance, trazabilidad de outputs en entornos clínicos. Dr. Walker es co-fundador de MDCalc; Dr. Nedoszytko ganó el Claude Code Hackathon. Q&A con el equipo de Anthropic." data-en="Live demos of clinical tools built by physicians with Claude Code. Topics: auditability, compliance, output traceability in clinical environments. Dr. Walker is co-founder of MDCalc; Dr. Nedoszytko won the Claude Code Hackathon. Open Q&A with Anthropic's Claude Code team.">Demos en vivo de herramientas clínicas construidas por médicos con Claude Code. Auditabilidad, compliance y trazabilidad en entornos clínicos reales. Q&A con el equipo de Anthropic.</div>
+          <div class="res-pills"><span class="pill pill-blue">Claude Code</span><span class="pill pill-blue">LLMs</span><span class="pill pill-teal" data-es="Herramientas clínicas" data-en="Clinical tools">Herramientas clínicas</span><span class="pill pill-teal">Responsible AI</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free">Free</span>
+          <a class="res-link" href="https://www.anthropic.com/webinars/claude-code-in-healthcare-how-physicians-are-building-with-claude" target="_blank">↗ <span data-es="Ver grabación" data-en="Watch recording">Ver grabación</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SECTION 5: NEW — Data / Tools / Infrastructure (UF Health) ── -->
+  <div class="allres-section">
+    <div class="allres-section-header">
+      <span class="allres-section-icon">🗄️</span>
+      <span class="allres-section-title" data-es="Datos, herramientas e infraestructura" data-en="Data, tools & infrastructure">Datos, herramientas e infraestructura</span>
+      <span class="allres-section-count" data-es="4 recursos · UF Health AI" data-en="4 resources · UF Health AI">4 recursos · UF Health AI</span>
+    </div>
+
+    <!-- Source callout -->
+    <div class="source-callout">
+      <div class="source-callout-icon">🏥</div>
+      <div class="source-callout-body">
+        <div class="source-callout-label" data-es="Fuente · UF Health AI" data-en="Source · UF Health AI">Fuente · UF Health AI</div>
+        <div class="source-callout-title">UF Health AI — Explore Resources</div>
+        <div class="source-callout-desc" data-es="Centro de recursos de IA de la Universidad de Florida para investigadores y clínicos: supercomputación (HiPerGator AI, top-500 mundial), repositorios de datos clínicos de gran escala, programas de formación y fondos piloto. Acceso institucional — mayormente para afiliados UF." data-en="University of Florida's AI resource hub for researchers and clinicians: supercomputing (HiPerGator AI, top-500 worldwide), large-scale clinical data repositories, training programs, and pilot funding. Institutional access — primarily for UF affiliates.">Centro de recursos de IA de la Universidad de Florida: supercomputación HiPerGator AI (top-500 mundial), repositorios de datos clínicos, formación y fondos piloto. Acceso institucional.</div>
+        <a class="source-callout-link" href="https://ai.ufhealth.org/explore-resources/" target="_blank">↗ ai.ufhealth.org/explore-resources</a>
+      </div>
+    </div>
+
+    <div class="res-list">
+
+      <div class="res-row" data-tags="data computing hipergator supercomputer nvidia research institutional">
+        <div class="res-type-dot rdot-data"></div>
+        <div class="res-body">
+          <div class="res-title">HiPerGator AI — UF Research Computing</div>
+          <div class="res-meta">UF / NVIDIA Partnership · Top-500 supercomputer · Institutional access</div>
+          <div class="res-desc" data-es="Uno de los supercomputadores académicos más potentes del mundo (NVIDIA partnership). Acceso para enseñanza e investigación. Entorno para datos restringidos disponible (ResVault). Referencia para entender cómo se escala IA en salud a nivel institucional." data-en="One of the world's most powerful academic supercomputers (NVIDIA partnership). Access for teaching and research. Restricted data environment available (ResVault). A reference for understanding how healthcare AI scales at the institutional level.">Uno de los supercomputadores académicos más potentes del mundo. Acceso para investigación y enseñanza. Entorno para datos restringidos (ResVault).</div>
+          <div class="res-pills"><span class="pill pill-teal" data-es="Computación IA" data-en="AI computing">Computación IA</span><span class="pill pill-blue">GPU · HPC</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price tba" data-es="Institucional" data-en="Institutional">Institucional</span>
+          <a class="res-link" href="https://www.rc.ufl.edu/about/ai/" target="_blank">↗ UF RC</a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="data clinical ehr patients repository research institutional ufhealth">
+        <div class="res-type-dot rdot-data"></div>
+        <div class="res-body">
+          <div class="res-title">UF Health Integrated Data Repository + OneFlorida+ Data Trust</div>
+          <div class="res-meta">UF Health · +1 billón de hechos observacionales · +17 millones de pacientes</div>
+          <div class="res-desc" data-es="Dos de los repositorios clínicos de mayor escala de EE.UU. El IDR contiene datos de +1 millón de pacientes de UF Health. OneFlorida+ agrega 17 millones de pacientes de Florida, Georgia y Alabama. Acceso con pathway institucional establecido." data-en="Two of the largest clinical repositories in the US. IDR contains data for 1M+ UF Health patients. OneFlorida+ aggregates 17M patients across Florida, Georgia, and Alabama. Access via established institutional pathways.">Dos de los mayores repositorios clínicos de EE.UU.: +1M pacientes UF Health y 17M pacientes OneFlorida+. Acceso con pathway institucional.</div>
+          <div class="res-pills"><span class="pill pill-teal">EHR</span><span class="pill pill-teal" data-es="Datos reales" data-en="Real-world data">Datos reales</span><span class="pill pill-blue" data-es="Escala masiva" data-en="Massive scale">Escala masiva</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price tba" data-es="Institucional" data-en="Institutional">Institucional</span>
+          <a class="res-link" href="https://idr.ufhealth.org/" target="_blank">↗ IDR</a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="course bootcamp cme clinicians ai-medicine training ufhealth free paid">
+        <div class="res-type-dot rdot-course"></div>
+        <div class="res-body">
+          <div class="res-title">UF College of Medicine — AI Education Programs</div>
+          <div class="res-meta">UF Health · Bootcamp 2 días + AI4Health CME + Emerging Scholars-AI</div>
+          <div class="res-desc" data-es="Portafolio de formación en IA médica: bootcamp de 2 días para investigadores, programa AI4Health CME para clínicos, Emerging Scholars-AI para doctorandos, y currículo de IA en medicina para residentes y faculty." data-en="Medical AI training portfolio: 2-day bootcamp for researchers, AI4Health CME for clinicians, Emerging Scholars-AI for PhD students, and AI in medicine curriculum for trainees and faculty.">Bootcamp de 2 días, AI4Health CME para clínicos, Emerging Scholars-AI para PhDs, y currículo de IA en medicina para residentes.</div>
+          <div class="res-pills"><span class="pill pill-amber" data-es="Para clínicos" data-en="For clinicians">Para clínicos</span><span class="pill pill-teal">CME</span><span class="pill pill-teal" data-es="Responsible AI" data-en="Responsible AI">Responsible AI</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free" data-es="Mixto" data-en="Mixed">Mixto</span>
+          <a class="res-link" href="https://research.med.ufl.edu/research-training-2/ai-boot-camp/" target="_blank">↗ UF Med</a>
+        </div>
+      </div>
+
+      <div class="res-row" data-tags="data tool funding datathon pilot research ufhealth">
+        <div class="res-type-dot rdot-tool"></div>
+        <div class="res-body">
+          <div class="res-title">AI2Heal Datathon + Pilot Funding Programs</div>
+          <div class="res-meta">UF College of Medicine + CTSI · Fondos piloto competitivos</div>
+          <div class="res-desc" data-es="AI2Heal Datathon: evento de ciencia de datos aplicada a salud (UF CoM). Complementado por el programa de Pilot Project Awards del CTSI de UF. Oportunidades para investigadores que quieren desarrollar y validar métodos de IA con datos clínicos reales." data-en="AI2Heal Datathon: data science event applied to health (UF CoM). Complemented by UF CTSI Pilot Project Awards. Opportunities for researchers wanting to develop and validate AI methods with real clinical data.">AI2Heal Datathon (ciencia de datos aplicada) + Pilot Project Awards del CTSI. Para investigadores con proyectos de IA en salud.</div>
+          <div class="res-pills"><span class="pill pill-teal">Datathon</span><span class="pill pill-blue" data-es="Fondos piloto" data-en="Pilot funding">Fondos piloto</span></div>
+        </div>
+        <div class="res-right">
+          <span class="res-price free" data-es="Ver convocatoria" data-en="See call">Ver convocatoria</span>
+          <a class="res-link" href="https://research.med.ufl.edu/research-training-2/ai2heal-datathon/" target="_blank">↗ <span data-es="Datathon" data-en="Datathon">Datathon</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="margin-top:8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-muted);line-height:1.8;">
+    <span data-es="📌 Recursos de UF Health AI principalmente para afiliados de la Universidad de Florida. Útiles como referencia de infraestructura de IA institucional a gran escala." data-en="📌 UF Health AI resources are primarily for University of Florida affiliates. Useful as a reference for large-scale institutional AI infrastructure.">📌 Recursos de UF Health AI principalmente para afiliados de la Universidad de Florida. Útiles como referencia de infraestructura de IA institucional a gran escala.</span>
+  </div>
+
+</div>
+</div><!-- /tab-allresources -->
+
 </body>
 </html>
